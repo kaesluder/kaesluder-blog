@@ -3,22 +3,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <title>Blog Title</title>
   <subtitle>This is a longer description about your blog.</subtitle>
-  <link href="https://example.com/kaesluder.github.io/feed/feed.xml" rel="self" />
-  <link href="https://example.com/kaesluder.github.io/" />
+  <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
+  <link href="https://example.com/kaesluder-blog/" />
   <updated>2025-06-28T00:00:00Z</updated>
-  <id>https://example.com/kaesluder.github.io/</id>
+  <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
   <entry>
     <title>28 June 2025: Shuffle and Backup</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/" />
     <updated>2025-06-28T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-CR628yT7aE?si=kFxctrIzZ27sry7c&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;visual-card-shuffle&quot;&gt;Visual Card Shuffle&lt;/h2&gt;
-&lt;p&gt;Continuing my exploration of &lt;a href=&quot;https://example.com/kaesluder.github.io/posts/cut-ups-krell/&quot;&gt;cut-ups&lt;/a&gt; my sourcing interesting images from Wikimedia Commons and the Met Open Access collection. Then I shuffle the images and arrange nine of them on a grid:&lt;/p&gt;
-&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.avif 834w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.webp 834w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.png&quot; alt=&quot;screenshot of web interface with photo tiles arranged in a 3 by 3 grid&quot; width=&quot;834&quot; height=&quot;721&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;Continuing my exploration of &lt;a href=&quot;https://example.com/kaesluder-blog/posts/cut-ups-krell/&quot;&gt;cut-ups&lt;/a&gt; my sourcing interesting images from Wikimedia Commons and the Met Open Access collection. Then I shuffle the images and arrange nine of them on a grid:&lt;/p&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.avif 834w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.webp 834w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.png&quot; alt=&quot;screenshot of web interface with photo tiles arranged in a 3 by 3 grid&quot; width=&quot;834&quot; height=&quot;721&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;Pain points:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Image manipulation in css: My original idea was to use css to zoom in on random sections of each image, hoping for some creative serendipity. After an evening struggling with this. I gave up and started curating square tiles manually. The result is a bit creatively more satisfying, and it&#39;s a nice easy low-bandwidth task.&lt;/li&gt;
@@ -43,9 +43,9 @@
   </entry>
   <entry>
     <title>21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-06-21-zed-and-other-tricks/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-21-zed-and-other-tricks/" />
     <updated>2025-06-21T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-06-21-zed-and-other-tricks/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-21-zed-and-other-tricks/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/0FyLcHxbSRk?si=qAEMAohBM02byDmk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;playing-with-manjaro&quot;&gt;Playing with Manjaro&lt;/h2&gt;
 &lt;p&gt;Working (again) on making an older Thinkpad T420 (2011) useful for home surfing and light development. Trying out &lt;a href=&quot;https://manjaro.org/&quot;&gt; Manjaro &lt;/a&gt; for now because with hardware this old I&#39;ve run into issue with immutable systems like &lt;a href=&quot;https://fedoraproject.org/atomic-desktops/&quot;&gt;Fedora Atomic&lt;/a&gt;.&lt;/p&gt;
@@ -80,9 +80,9 @@
   </entry>
   <entry>
     <title>14 June 2025: Cut-Ups, Simplified Krell Patch</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-06-14-cut-ups-krell/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-14-cut-ups-krell/" />
     <updated>2025-06-14T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-06-14-cut-ups-krell/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-14-cut-ups-krell/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UrfFHzqGBZI?si=fEakddz0v1WR7Epk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;cut-ups-and-solo-ttrpg-play&quot;&gt;Cut-Ups and Solo TTRPG Play&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/robwieland/2023/11/25/now-is-a-great-time-to-check-out-solo-roleplaying/&quot;&gt;Solo Roleplaying&lt;/a&gt; combines elements of traditional tabletop RPGs like &lt;em&gt;Dungeons and Dragons,&lt;/em&gt; creative journaling, and the use of divination oracles as a means for brainstroming and reflection. The games use oracles such as random dice tables, tarot, or playing cards to create an element of challenge and surpise usually provided by gamemasters or (in the case of computer-rpgs) game-design teams.&lt;/p&gt;
@@ -167,9 +167,9 @@ with_fx &lt;span class=&quot;token symbol&quot;&gt;:ring_mod&lt;/span&gt;&lt;spa
   </entry>
   <entry>
     <title>7 June 2025: Link Post</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-06-07-link-post-2025-07/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-07-link-post-2025-07/" />
     <updated>2025-06-07T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-06-07-link-post-2025-07/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-07-link-post-2025-07/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/6QX57aIDbDU?si=f9Hhlke_TUSOIMGe&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;Most of this week has been applying bugfixes, interface refining, and unit test
 techniques discussed earlier.&lt;/p&gt;
@@ -206,9 +206,9 @@ unpredictable behavior.&lt;/p&gt;
   </entry>
   <entry>
     <title>1 June 2025: DIY, Double-Entry Accounting, and Shameless Green</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-06-01-double-entry-accounting-experiments/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-01-double-entry-accounting-experiments/" />
     <updated>2025-06-01T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-06-01-double-entry-accounting-experiments/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-01-double-entry-accounting-experiments/</id>
     <content type="html">&lt;p&gt;Lately I discovered a conflict between how my bank reports pending transactions
 and how You Need a Budget (YNAB) records them. YNAB is a household budgeting app
 that provides an estimate of available cash after expected expenses. However
@@ -284,9 +284,9 @@ two or more &lt;em&gt;splits&lt;/em&gt;.&lt;/p&gt;
   </entry>
   <entry>
     <title>24 May 2025, rswag and Murderbot</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-05-24-rswag-murderbot-gnucash/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-05-24-rswag-murderbot-gnucash/" />
     <updated>2025-05-24T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-05-24-rswag-murderbot-gnucash/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-05-24-rswag-murderbot-gnucash/</id>
     <content type="html">&lt;h3 id=&quot;rswag&quot;&gt;rswag&lt;/h3&gt;
 &lt;p&gt;Programming: Created a self-documenting API endpoint using
 &lt;a href=&quot;https://github.com/rswag/rswag&quot;&gt;rswag&lt;/a&gt;.&lt;/p&gt;
@@ -360,9 +360,9 @@ find them to be relatable.&lt;/p&gt;
   </entry>
   <entry>
     <title>React and Vue: Two Weeks Learning Reflections</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-05-17-learning/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-05-17-learning/" />
     <updated>2025-05-17T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-05-17-learning/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-05-17-learning/</id>
     <content type="html">&lt;p&gt;A current project is to implement Plaid account configuration for customers.
 Unfortunately, Plaid is not quite compatible with what we need or our legacy
 code for international accounts. Our plaid interface includes some followup
@@ -397,9 +397,9 @@ html templating that it&#39;s not a big deal.&lt;/p&gt;
   </entry>
   <entry>
     <title>April 2025 Link Post</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-04-13-link-post/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-04-13-link-post/" />
     <updated>2025-04-13T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-04-13-link-post/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-04-13-link-post/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/jm-rMP9bvbU?si=wSpbOB9ColZgouJA&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;Various links:&lt;/p&gt;
 &lt;ul&gt;
@@ -411,9 +411,9 @@ html templating that it&#39;s not a big deal.&lt;/p&gt;
   </entry>
   <entry>
     <title>i18n mocks with vitest</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2025-03-18-i18n-vitest-mocks/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-03-18-i18n-vitest-mocks/" />
     <updated>2025-03-18T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2025-03-18-i18n-vitest-mocks/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-03-18-i18n-vitest-mocks/</id>
     <content type="html">&lt;p&gt;This recipe is adapted from &lt;a href=&quot;https://react.i18next.com/misc/testing&quot;&gt;the i18n-react testing page&lt;/a&gt; and adapted for vitest (which thankfully works the same way its jest counterpart.)&lt;/p&gt;
 &lt;p&gt;The project I&#39;m working on ran into some difficulty in unit testing. The i18n config object loads data from an api when it first loads. In most cases I use &lt;a href=&quot;https://mswjs.io/&quot;&gt;Mock Service Worker&lt;/a&gt; (MSW) for API calls, but I couldn&#39;t get MSW running before i18n. The solution was to mock i18n-react entirely, which ended up down a rabbit hole of false leads until I read the i18n-react documentation and found a mocking recipe that worked.&lt;/p&gt;
 &lt;p&gt;Setup the mock in its own file to use in multiple tests.&lt;/p&gt;
@@ -447,9 +447,9 @@ html templating that it&#39;s not a big deal.&lt;/p&gt;
   </entry>
   <entry>
     <title>Fedora Silverblue</title>
-    <link href="https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/" />
+    <link href="https://example.com/kaesluder-blog/blog/2024-11-09-silverblue/" />
     <updated>2024-11-16T00:00:00Z</updated>
-    <id>https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/</id>
+    <id>https://example.com/kaesluder-blog/blog/2024-11-09-silverblue/</id>
     <content type="html">&lt;p&gt;I like to try out different linux distributions.
 Part of it is testing how how different groups implement some of the same ideas,
 but part is due to inevitably finding rough edges as an install ages over time.
@@ -478,16 +478,16 @@ Currently I have arch, bazzite-arch, and alpine ready to run.
 It comes with multiple apps for linux gaming pre-installed.
 Distrobox also has the ability to assign different home folders to containers.
 By default they all use the same home folder, which makes accessing files convenient.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/distrobox_list.png&quot; alt=&quot;List of distrobox images including arch, bazzite-arch, and alpine&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder-blog/blog/2024-11-09-silverblue/content/images/distrobox_list.png&quot; alt=&quot;List of distrobox images including arch, bazzite-arch, and alpine&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Forwarding of graphical windows from a container to the Siverblue host works well.
 Distrobox also has a utility to export desktop menu information
 so I can launch apps directly from the Gnome desktop. (How do games play?
 I&#39;ve had mixed results but I don&#39;t have a gaming laptop
 and have not done a lot of testing here.)
 There are some minor glitches but few consistent problems.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/lutris_screenshot.png&quot; alt=&quot;My election survival toolkit on Lutris&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder-blog/blog/2024-11-09-silverblue/content/images/lutris_screenshot.png&quot; alt=&quot;My election survival toolkit on Lutris&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Lutris running from bazzite-arch container&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/xeyes_screenshot.png&quot; alt=&quot;Biblically Accurate Xeyes&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder-blog/blog/2024-11-09-silverblue/content/images/xeyes_screenshot.png&quot; alt=&quot;Biblically Accurate Xeyes&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Biblically Accurate Xeyes&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The switch also included jumping into Gnome for the first time in several years.
 Mostly I&#39;ve been sticking with KDE but have been wanting a change focused on minimizing distractions.
