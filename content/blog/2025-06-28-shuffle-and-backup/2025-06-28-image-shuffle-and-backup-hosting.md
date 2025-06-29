@@ -34,3 +34,9 @@ A few months ago the disk that had my only copy of multiple desktop backup faile
 - Well crap, my sewing patterns are gone.
 
 The last point pushed me to set up backups on the Thinkpad T420 I mentioned earlier as a backup system. It was mostly easy sailing once I specified full paths and set up my ssh keys. I used the Pika front end for BackupBorg to make everything work.
+
+## Reading Quote
+
+> Taking responsibility does not mean that we deny the reality of institutional injustice. For example, racism, sexism, and homophobia all create barriers and concrete instances of discrimination. Simply taking responsibility does not mean we can prevent discriminatory acts from happening. But we can choose how we respond to acts of injustice. Taking responsibility means that in the face of barriers we still have the capacity to invent our lives, to shape our destinies in ways that maximize our well-being. Every day we practice this shape shifting to cope with realities we cannot easily change.
+
+- bell hooks, "All About Love," Chapter 4
