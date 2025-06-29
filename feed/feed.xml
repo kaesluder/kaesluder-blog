@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="pretty-atom-feed.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>Blog Title</title>
+  <subtitle>This is a longer description about your blog.</subtitle>
+  <link href="https://example.com/kaesluder.github.io/feed/feed.xml" rel="self" />
+  <link href="https://example.com/kaesluder.github.io/" />
+  <updated>2025-06-28T00:00:00Z</updated>
+  <id>https://example.com/kaesluder.github.io/</id>
+  <author>
+    <name>Your Name</name>
+  </author>
+  <entry>
+    <title>28 June 2025: Shuffle and Backup</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/" />
+    <updated>2025-06-28T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-CR628yT7aE?si=kFxctrIzZ27sry7c&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h2 id=&quot;visual-card-shuffle&quot;&gt;Visual Card Shuffle&lt;/h2&gt;
+&lt;p&gt;Continuing my exploration of &lt;a href=&quot;https://example.com/kaesluder.github.io/posts/cut-ups-krell/&quot;&gt;cut-ups&lt;/a&gt; my sourcing interesting images from Wikimedia Commons and the Met Open Access collection. Then I shuffle the images and arrange nine of them on a grid:&lt;/p&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.avif 834w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.webp 834w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/kaesluder.github.io/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.png&quot; alt=&quot;screenshot of web interface with photo tiles arranged in a 3 by 3 grid&quot; width=&quot;834&quot; height=&quot;721&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;Pain points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Image manipulation in css: My original idea was to use css to zoom in on random sections of each image, hoping for some creative serendipity. After an evening struggling with this. I gave up and started curating square tiles manually. The result is a bit creatively more satisfying, and it&#39;s a nice easy low-bandwidth task.&lt;/li&gt;
+&lt;li&gt;Typescript: Kept getting warnings on a helper function that returns a JSX.Element type. Documentation on how to deal with it is inconsistent. Is it handled automatically by a vite setting (and if so, why is it being flagged)? Basic conclusion is that I need to learn a lot more about how to work with Typescript before picking it up for projects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Next steps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In-page documentation&lt;/li&gt;
+&lt;li&gt;A keep-and-draw mechanic with limited keeps&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;backups&quot;&gt;Backups&lt;/h2&gt;
+&lt;p&gt;A few months ago the disk that had my only copy of multiple desktop backup failed. My thought process in procrastinating on new backups was:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Essential work is on github&lt;/li&gt;
+&lt;li&gt;Most of those backups were ephemera&lt;/li&gt;
+&lt;li&gt;I rarely re-read books&lt;/li&gt;
+&lt;li&gt;I&#39;ve not looked at that stuff in a while&lt;/li&gt;
+&lt;li&gt;Well crap, my sewing patterns are gone.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The last point pushed me to set up backups on the Thinkpad T420 I mentioned earlier as a backup system. It was mostly easy sailing once I specified full paths and set up my ssh keys. I used the Pika front end for BackupBorg to make everything work.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-06-21-zed-and-other-tricks/" />
+    <updated>2025-06-21T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-06-21-zed-and-other-tricks/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/0FyLcHxbSRk?si=qAEMAohBM02byDmk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h2 id=&quot;playing-with-manjaro&quot;&gt;Playing with Manjaro&lt;/h2&gt;
+&lt;p&gt;Working (again) on making an older Thinkpad T420 (2011) useful for home surfing and light development. Trying out &lt;a href=&quot;https://manjaro.org/&quot;&gt; Manjaro &lt;/a&gt; for now because with hardware this old I&#39;ve run into issue with immutable systems like &lt;a href=&quot;https://fedoraproject.org/atomic-desktops/&quot;&gt;Fedora Atomic&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;tweaking-full-disk-encryption&quot;&gt;Tweaking full-disk encryption&lt;/h3&gt;
+&lt;p&gt;Full-disk encryption defaults can be unbearably slow for unlocking (over 1 minute) on this machine. Unlocking happens early during the boot process before the system has access to crypto hardware. I tweaked this using the following to set the number of iterations to a lower value. Dropping from 1,500,000 to 10,000 combined with a high-entropy passphrase is hopefully good enough for the need:&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksChangeKey --pbkdf-force-iterations &lt;span class=&quot;token number&quot;&gt;10000&lt;/span&gt; --key-slot &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; /dev/sda1
+
+&lt;span class=&quot;token comment&quot;&gt;# check key creation&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksDump /dev/sda1
+
+&lt;span class=&quot;token comment&quot;&gt;# remove old key&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksKillKey /dev/sda1 &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As always, double-check device ids and RTFM before making changes.&lt;/p&gt;
+&lt;h2 id=&quot;tools-show-and-share&quot;&gt;Tools Show and Share&lt;/h2&gt;
+&lt;p&gt;Working on a show-and-share featuring the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://zed.dev/&quot;&gt;Zed Editor&lt;/a&gt;: Fast editor written in rust.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/sigoden/aichat&quot;&gt;aichat&lt;/a&gt;: Command line LLM client. Good for working through tricky bash and git options.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;challenges-of-the-week&quot;&gt;Challenges of the Week&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Adapting a legacy web component to read a new data spec as part of our plaid integration. So far it&#39;s mostly understanding the old data structure and renaming fields so that everything (hopefully) works.&lt;/li&gt;
+&lt;li&gt;Translation tags for a feature I&#39;ve been working on.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;games&quot;&gt;Games&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Started a playthrough of &lt;a href=&quot;https://altersthegame.com/&quot;&gt;The Alters&lt;/a&gt;. This is similar to the 1996 movie &lt;a href=&quot;https://www.imdb.com/title/tt0117108/&quot;&gt;Multiplicity&lt;/a&gt; where a stressed-out husband clones himself multiple times. &lt;em&gt;The Alters&lt;/em&gt; is a base-building survival game centered around Jan, a construction expert. Fortunately, he has weird science to clone himself multiple times, giving each clone fake memories of the training and skills he lacks. Unfortunately, each clone has survived a different set of challenges and traumas. As is frequently the case in survival scifi, your biggest challenge is yourself.&lt;/li&gt;
+&lt;li&gt;Backed &lt;a href=&quot;https://www.kickstarter.com/projects/hecticelectron/defy-the-gods-rpg&quot;&gt;Defy the Gods&lt;/a&gt;, a mesopotamian-themed TTRPG.&lt;/li&gt;
+&lt;li&gt;Picked up &lt;a href=&quot;https://modiphius.net/en-us/pages/homeworld&quot;&gt;Homeworld: Revelations&lt;/a&gt;, because I&#39;ve never been quite able to get the CRPG to run.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>14 June 2025: Cut-Ups, Simplified Krell Patch</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-06-14-cut-ups-krell/" />
+    <updated>2025-06-14T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-06-14-cut-ups-krell/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UrfFHzqGBZI?si=fEakddz0v1WR7Epk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;h2 id=&quot;cut-ups-and-solo-ttrpg-play&quot;&gt;Cut-Ups and Solo TTRPG Play&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/robwieland/2023/11/25/now-is-a-great-time-to-check-out-solo-roleplaying/&quot;&gt;Solo Roleplaying&lt;/a&gt; combines elements of traditional tabletop RPGs like &lt;em&gt;Dungeons and Dragons,&lt;/em&gt; creative journaling, and the use of divination oracles as a means for brainstroming and reflection. The games use oracles such as random dice tables, tarot, or playing cards to create an element of challenge and surpise usually provided by gamemasters or (in the case of computer-rpgs) game-design teams.&lt;/p&gt;
+&lt;p&gt;Lately I&#39;ve been experimenting with &lt;a href=&quot;https://en.wikipedia.org/wiki/Cut-up_technique&quot;&gt;cut-up techniques&lt;/a&gt; as a way to drive scenes and plot developments. a more direct TTRPG implementation is included in the &lt;a href=&quot;https://www.drivethrurpg.com/en/product/319632/tilt-an-oracle-for-solo-roleplaying&quot;&gt;Tilt: An oracle for solo roleplaying&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Primarily I&#39;ve been using song lyrics because poetry offers a high level of imagery per word. The process I use involves the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Collection&lt;/li&gt;
+&lt;li&gt;Curation&lt;/li&gt;
+&lt;li&gt;Random Draws&lt;/li&gt;
+&lt;li&gt;Editing&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Collection: Pulling text from sources that match the overall theme of the current game. In the example below, I started with music that felt personally and/or politically apocalyptic (even if the song isn&#39;t necessarily science fiction themed). After a few trials, I added in some additional texts to fill in some missing pieces (in this case, &amp;quot;Building Steam with a Grain of Salt,&amp;quot; &amp;quot;Not,&amp;quot; and &amp;quot;Many Moons&amp;quot;). These get copied into a markdown file with source citations at the top and lyrics below.&lt;/p&gt;
+&lt;pre class=&quot;language-markdown&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;#&lt;/span&gt; music for scifi game&lt;/span&gt;
+
+&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;##&lt;/span&gt; Sources&lt;/span&gt;
+
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; St. Vincent, &quot;Los Ageless&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Beast in Black, &quot;Moonlight Rendezvous&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Reliqa, &quot;E.O.D.&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Reliqa, &quot;Cold World&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Frozen Crown, &quot;I am the Tyrant&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Rolling Stones, &quot;Paint it Black&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; DJ Shadow, &quot;Building Steam with a Grain of Salt&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Patti Smith (orig Springsteen), &quot;Because the Night&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Leonard Cohen, &quot;You Want it Darker&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Big Thief, &quot;Not&quot;
+&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Janelle Monae, &quot;Many Moons&quot;
+
+&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;##&lt;/span&gt; Text&lt;/span&gt;
+
+In Los Ageless,
+the winter never comes
+the mothers milk their young
+But I can keep running
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Curation: I edit down the original text to get rid of repeated lines. I also break up lines to get a single idea per line,&lt;/p&gt;
+&lt;p&gt;Random Draws: I use the simple unix command line &lt;code&gt;tail -n +18 music_scifi.md | shuf | head -n 15&lt;/code&gt;. (Remove the first 18 lines (sources), shuffle all the lines, take the first 15 lines.)&lt;/p&gt;
+&lt;p&gt;Editing: Further edit the result to fit the situation and grammar. For example, a response to &amp;quot;What really motivates the antagonist?&amp;quot;:&lt;/p&gt;
+&lt;pre class=&quot;language-markdown&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-markdown&quot;&gt;Is there a lullaby for suffering? (&quot;You Want it Darker&quot;)
+Come on now, try to understand (&quot;Because the Night&quot;)
+My doubts make me alone (&quot;Because the Night&quot;)
+Not your stable words (&quot;Not&quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Through the process of sifting and editing, a previously flat antagonist now has depth, a motivation, and a possible weakness.&lt;/p&gt;
+&lt;h2 id=&quot;sonic-pi-a-krell-ish-experiment&quot;&gt;Sonic Pi: A Krell-ish Experiment&lt;/h2&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/oNKhju6Pryg?si=SrIF1OpmEpfHI2fk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Bebe and Louis Barron&#39;s soundtrack work for &lt;em&gt;Forbidden Planet&lt;/em&gt; is considered to be one of the first examples of generative electronic music in cinema. It&#39;s also a project that&#39;s often imitated because it includes pitch, envelope, and filter randomization. Here&#39;s a simplified attempt at a &amp;quot;krell patch&amp;quot; implemented in sonic pi:&lt;/p&gt;
+&lt;pre class=&quot;language-ruby&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-ruby&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Welcome to Sonic Pi&lt;/span&gt;
+
+define &lt;span class=&quot;token symbol&quot;&gt;:three_d_6&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+  result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;token number&quot;&gt;3.&lt;/span&gt;times &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+    result &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; dice &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
+  puts result
+  result
+&lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
+
+time_scale &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.25&lt;/span&gt;
+note_slide &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+ring_mod_freq &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;60&lt;/span&gt;
+
+with_fx &lt;span class=&quot;token symbol&quot;&gt;:ring_mod&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;mix&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ring_mod_freq &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;token number&quot;&gt;3.&lt;/span&gt;times &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+    attack &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; three_d_6 &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; time_scale
+    release &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; three_d_6 &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; time_scale
+    note &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; rrand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    use_synth &lt;span class=&quot;token symbol&quot;&gt;:fm&lt;/span&gt;
+    play note&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;attack&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; attack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; release&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;note_slide&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; note_slide
+    use_synth &lt;span class=&quot;token symbol&quot;&gt;:chipbass&lt;/span&gt;
+    play note &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; rrand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;attack&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; attack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; release&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;note_slide&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; note_slide
+    sleep attack &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; release &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;work-research&quot;&gt;Work Research&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/scenic-views/scenic&quot;&gt;senic gem&lt;/a&gt; - Ruby gem for for managing postgres views.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@snapsheetclaims/our-journey-exploring-the-magic-of-views-in-rails-applications-28e5b3797254&quot;&gt;Our Journey: Exploring the Magic of Views in Rails Applications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://alisepehri.medium.com/how-to-create-database-views-in-ruby-on-rails-537f1a981e3d&quot;&gt;How to create Database Views in Ruby on Rails?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.usebruno.com/&quot;&gt;Bruno&lt;/a&gt; - new postman substitute that uses github for synchronizing collections&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>7 June 2025: Link Post</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-06-07-link-post-2025-07/" />
+    <updated>2025-06-07T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-06-07-link-post-2025-07/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/6QX57aIDbDU?si=f9Hhlke_TUSOIMGe&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Most of this week has been applying bugfixes, interface refining, and unit test
+techniques discussed earlier.&lt;/p&gt;
+&lt;h2 id=&quot;neurodivergence&quot;&gt;Neurodivergence&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://thedailytism.com/&quot;&gt;The Daily Tism&lt;/a&gt;, autistic comedy blog.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.kcl.ac.uk/news/gaps-in-adhd-research-hindering-policy&quot;&gt;King&#39;s College London&lt;/a&gt;,
+no significant rise in the prevalence of ADHD, but research is flawed.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.verywellmind.com/what-to-know-about-autism-and-justice-sensitivity-8631234&quot;&gt;verywellmind&lt;/a&gt;,
+article on justice sensitivity in ADHD and Autistic people.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;digital-music&quot;&gt;Digital Music&lt;/h2&gt;
+&lt;p&gt;Digital music has been an on-and-off interest. Spent part of this week playing
+with &lt;a href=&quot;https://www.bespokesynth.com/&quot;&gt;Bespoke&lt;/a&gt; a cross-platform modular software
+synth.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/N_OeDNIkUR4?si=EXzvZFw6NhxB-66L&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Introduction video:&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JI7bukrObxU?si=d2DZ36xBDdjzH08v&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Modular synthesis breaks the process of sound creation into separate modules. A
+bare-bones circuit or &amp;quot;patch&amp;quot; includes:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;An instrument, sequencer, or controller that creates pitch data.&lt;/li&gt;
+&lt;li&gt;An oscillator that creates noise.&lt;/li&gt;
+&lt;li&gt;An envelope module that determines the volume of each note over time.&lt;/li&gt;
+&lt;li&gt;An amplifier that determines the overall volume for multiple notes.&lt;/li&gt;
+&lt;li&gt;Optional filters and affect to change the quality of the sound.&lt;/li&gt;
+&lt;li&gt;An output device (typically speakers).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Modular synthesis gets interesting when you chain the output of one module to
+the control to another. This can create interesting feedback loops and
+unpredictable behavior.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>1 June 2025: DIY, Double-Entry Accounting, and Shameless Green</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-06-01-double-entry-accounting-experiments/" />
+    <updated>2025-06-01T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-06-01-double-entry-accounting-experiments/</id>
+    <content type="html">&lt;p&gt;Lately I discovered a conflict between how my bank reports pending transactions
+and how You Need a Budget (YNAB) records them. YNAB is a household budgeting app
+that provides an estimate of available cash after expected expenses. However
+those estimates can go off when pending transactions are changed, deleted, or
+replaced. This is often the case with delivery services and tips.&lt;/p&gt;
+&lt;p&gt;When I&#39;m chewing on a difficult topic I like to model parts of it in code. The
+point of many of my DIY projects isn&#39;t to create a viable product or customize
+software to my needs but to explore practical aspects of a problem using data
+that&#39;s of interest to me. Also I get practice in understanding edge cases for a
+problem.&lt;/p&gt;
+&lt;h3 id=&quot;problem&quot;&gt;Problem&lt;/h3&gt;
+&lt;p&gt;Statements from my bank record each transaction, a sample of transactions look
+like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;05/01/2025  Deposit     $1,000
+05/01/2025  Groceries   $-100
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Double-entry accounting uses a minimum of two records for each transaction. A
+transaction is recorded as a credit on one &amp;quot;account&amp;quot; and a debit on another
+account. This provides a clearer picture of where money comes from and where it
+goes.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Date        Account     Credit  Debit
+2025-05-01  Income      1000
+2025-05-01  Checking            1000
+2025-05-01  Groceries           100
+2025-05-01  Checking    100
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;shameless-green&quot;&gt;Shameless Green&lt;/h3&gt;
+&lt;p&gt;I&#39;ve been working on practicing the shameless green programming model (as
+described by &lt;a href=&quot;https://sandimetz.com/99bottles&quot;&gt;Sandi Metz&lt;/a&gt;). Shameless green is
+a test-driven development method that priorities creating the simplest code
+possible to pass unit tests. Style issues like Don&#39;t Repeat Yourself (DRY) are
+left for later revision and refactoring.&lt;/p&gt;
+&lt;p&gt;A lot of this is very basic, but it&#39;s a new language for me.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Hello World&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Test that the project layout and testing setup works&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Importing CVS&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Load full file&lt;/li&gt;
+&lt;li&gt;Skip metadata lines&lt;/li&gt;
+&lt;li&gt;Process header line&lt;/li&gt;
+&lt;li&gt;Tweak starting balance line&lt;/li&gt;
+&lt;li&gt;Convert to CSV::Row objects&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Processing lines&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Parse date string to date object&lt;/li&gt;
+&lt;li&gt;Remove commas from number strings&lt;/li&gt;
+&lt;li&gt;Convert numbers to floats&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Building double-entry transactions: gnucash and
+&lt;a href=&quot;https://hledger.org/start.html&quot;&gt;ledger&lt;/a&gt; use a model with &lt;em&gt;transactions&lt;/em&gt; with
+two or more &lt;em&gt;splits&lt;/em&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Match CSV columns to object fields&lt;/li&gt;
+&lt;li&gt;Check integrity: credits = debits&lt;/li&gt;
+&lt;li&gt;Missing field check&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;steps-forward&quot;&gt;Steps Forward&lt;/h3&gt;
+&lt;p&gt;This is a learning project to explore double-entry accounting. For day-to-day tracking, existing software does the job. If I come back to this, the next step would be expanding the import system to automatically classify transactions, and implementing basic income and balance statements.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>24 May 2025, rswag and Murderbot</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-05-24-rswag-murderbot-gnucash/" />
+    <updated>2025-05-24T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-05-24-rswag-murderbot-gnucash/</id>
+    <content type="html">&lt;h3 id=&quot;rswag&quot;&gt;rswag&lt;/h3&gt;
+&lt;p&gt;Programming: Created a self-documenting API endpoint using
+&lt;a href=&quot;https://github.com/rswag/rswag&quot;&gt;rswag&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Optional: Define json schema for responses.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-json&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;$schema&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;http://json-schema.org/draft-07/schema#&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;object&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;properties&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;valid&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token property&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;boolean&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token property&quot;&gt;&quot;enum&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token property&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;string&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token property&quot;&gt;&quot;enum&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Valid working name&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;required&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;valid&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;Use rswag and rspec DSLs to define interactions. The &lt;code&gt;check_working_name&lt;/code&gt;
+endpoint takes a single parameter &lt;code&gt;working_name&lt;/code&gt; and returns a valid or
+invalid status.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-ruby&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-ruby&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# incomplete code example&lt;/span&gt;
+path &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;/api/check_working_name&#39;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+   existing_working_name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&quot;this exists in database&quot;&lt;/span&gt;&lt;/span&gt;
+   new_working_name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&quot;this does not exist in database&quot;&lt;/span&gt;&lt;/span&gt;
+
+   &lt;span class=&quot;token comment&quot;&gt;# add a new :data_object to the database.&lt;/span&gt;
+   let&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token symbol&quot;&gt;:data_object1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; create&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token symbol&quot;&gt;:data_object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;working_name&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; existing_working_name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+   parameter name&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;:working_name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;:query&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;:string&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token symbol&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;Working name to validate&#39;&lt;/span&gt;&lt;/span&gt;
+
+   get&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;check_working_name lookup&#39;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+     tags &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;Lookup&#39;&lt;/span&gt;&lt;/span&gt;
+     produces &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;application/json&#39;&lt;/span&gt;&lt;/span&gt;
+
+     response&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;Valid Working name&#39;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
+       let&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token symbol&quot;&gt;:working_name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; new_working_name &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+       contract_schema &lt;span class=&quot;token string-literal&quot;&gt;&lt;span class=&quot;token string&quot;&gt;&#39;lookups/check_working_name_valid&#39;&lt;/span&gt;&lt;/span&gt;
+       run_test&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;
+     &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
+   &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;Create swagger documentation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-sh&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;bundle &lt;span class=&quot;token builtin class-name&quot;&gt;exec&lt;/span&gt; rake rswag:specs:swaggerize&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;murderbot&quot;&gt;Murderbot&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Murderbot&lt;/em&gt; is the AppleTV adaptation of &lt;em&gt;The Murderbot Diaries&lt;/em&gt; by Martha
+Wells. The series centers on &lt;em&gt;Murderbot&lt;/em&gt; a cyborg Security Unit who develops
+human relationships and passes for human. Unlike most robot stories, Murderbot
+has no desire to become human, just be accepted on its own terms. The book
+series may not have started using Murderbot as a metaphor for neurodivergence,
+but that framing has been accepted by the author and incorporated into the
+screenplay for the TV adaptation.&lt;/p&gt;
+&lt;p&gt;Parallel to this, there&#39;s been
+&lt;a href=&quot;https://media.ed.ac.uk/media/DiSI+Animation+2.0/1_62bchtwd&quot;&gt;new research&lt;/a&gt; on
+the double empathy problem of autism. The double empathy problem suggests that
+for low-needs autistic people, difficulties in communication come primarily from
+differences in communication style rather than social deficits. Anecdotal
+evidence and limited studies find that autistic people communicate with high
+accuracy with other autistic people, but communication in mixed
+autistic/non-autistic is worse than in homogeneous groups.&lt;/p&gt;
+&lt;p&gt;Most of the comedy in Murderbot comes from differences in communication styles.
+Murderbot visual sees the world through multiple cameras, the humans around it
+want face-to-face communication and eye contact. The human characters
+communicate care and consensus through physical touch, Murderbot prefers to
+stand in a corner. The humans thrive by communicating emotions, Murderbot
+processes massive amounts of data that can&#39;t be expressed in human terms.&lt;/p&gt;
+&lt;p&gt;These ideas may be exaggerated compared to ND/NT differences, but many people
+find them to be relatable.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>React and Vue: Two Weeks Learning Reflections</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-05-17-learning/" />
+    <updated>2025-05-17T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-05-17-learning/</id>
+    <content type="html">&lt;p&gt;A current project is to implement Plaid account configuration for customers.
+Unfortunately, Plaid is not quite compatible with what we need or our legacy
+code for international accounts. Our plaid interface includes some followup
+questions and confirmation the user wants to use this account to make payments
+through our system. The first step is to get it working for our legacy interface
+which uses Vue3. We&#39;ll have to rebuild this for our upcoming dashboard later in
+the year.&lt;/p&gt;
+&lt;p&gt;Documenting some pain points switching gears.&lt;/p&gt;
+&lt;h2 id=&quot;vue-options-api-vs-compose-api&quot;&gt;Vue Options API vs. Compose API&lt;/h2&gt;
+&lt;p&gt;I started with a proof-of-concept produced by a teammate that used the Options
+API, while a number of examples available to me used the Composition API. (See
+&lt;a href=&quot;https://vueschool.io/articles/vuejs-tutorials/options-api-vs-composition-api/&quot;&gt;article at Vue School for explanation.&lt;/a&gt;)
+Options API exports an object with sections for data, methods, computed values,
+properties, and other parts needed during the component lifecycle. Composition
+API defines many of the same features using more traditional JS. Using Options,
+it was sometimes confusing whether I needed a &lt;em&gt;method&lt;/em&gt; or a &lt;em&gt;computed&lt;/em&gt;
+expression. It made sense once I got into it.&lt;/p&gt;
+&lt;h2 id=&quot;field-binding-vs-state-setters&quot;&gt;Field Binding vs. State Setters&lt;/h2&gt;
+&lt;p&gt;Vue binds data directly to &lt;code&gt;input&lt;/code&gt; fields which makes some things very easy
+compared to React
+&lt;a href=&quot;https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable&quot;&gt;controlled input fields&lt;/a&gt;.
+Usually I find that the implicit data modification used by Vue to be more
+confusing than explicit setters. Once I knew what to look for, it wasn&#39;t a
+problem.&lt;/p&gt;
+&lt;h2 id=&quot;template-vs-jsx&quot;&gt;Template vs. JSX&lt;/h2&gt;
+&lt;p&gt;Vue&#39;s file layout mirrors an html file with setup performed in a &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; tag.
+This includes additional tag definitions for conditional and iteration logic. Vue&#39;s
+template approach (mostly) separates code from presentation. React uses JSX where
+&amp;quot;tags&amp;quot; are rendered function expressions. Vue&#39;s templates are similar enough to other
+html templating that it&#39;s not a big deal.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>April 2025 Link Post</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-04-13-link-post/" />
+    <updated>2025-04-13T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-04-13-link-post/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/jm-rMP9bvbU?si=wSpbOB9ColZgouJA&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Various links:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://ndconnection.co.uk/blog/autism-research-march-2025&quot;&gt;March 2025 roundup of useful autism research&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Playing: &lt;a href=&quot;https://oddmentsoh.itch.io/threads&quot;&gt;Threads (itch.io)&lt;/a&gt; a solo or collaborative journaling game for exploring what happens after the RPG campaign ends.&lt;/li&gt;
+&lt;li&gt;Reading: &lt;a href=&quot;https://bellhooksbooks.com/product/all-about-love/&quot;&gt;Bell Hooks, &lt;em&gt;All About Love&lt;/em&gt;&lt;/a&gt; trying to get out of internet soundbite churn by picking up some reading.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>i18n mocks with vitest</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2025-03-18-i18n-vitest-mocks/" />
+    <updated>2025-03-18T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2025-03-18-i18n-vitest-mocks/</id>
+    <content type="html">&lt;p&gt;This recipe is adapted from &lt;a href=&quot;https://react.i18next.com/misc/testing&quot;&gt;the i18n-react testing page&lt;/a&gt; and adapted for vitest (which thankfully works the same way its jest counterpart.)&lt;/p&gt;
+&lt;p&gt;The project I&#39;m working on ran into some difficulty in unit testing. The i18n config object loads data from an api when it first loads. In most cases I use &lt;a href=&quot;https://mswjs.io/&quot;&gt;Mock Service Worker&lt;/a&gt; (MSW) for API calls, but I couldn&#39;t get MSW running before i18n. The solution was to mock i18n-react entirely, which ended up down a rabbit hole of false leads until I read the i18n-react documentation and found a mocking recipe that worked.&lt;/p&gt;
+&lt;p&gt;Setup the mock in its own file to use in multiple tests.&lt;/p&gt;
+&lt;pre class=&quot;language-javascript&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// /src/mocks/i18nVitestMock.js&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;i18nVitestMock&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// Adapted from i18n-react docs&lt;/span&gt;
+  vi&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;mock&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;react-i18next&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function-variable function&quot;&gt;useTranslation&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function-variable function&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;i18nKey&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; i18nKey&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token literal-property property&quot;&gt;i18n&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token function-variable function&quot;&gt;changeLanguage&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token literal-property property&quot;&gt;initReactI18next&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token literal-property property&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;3rdParty&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token function-variable function&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This returns dummy functions for &lt;code&gt;init&lt;/code&gt;, &lt;code&gt;useTranslation&lt;/code&gt;, and &lt;code&gt;changeLanguage&lt;/code&gt; &lt;code&gt;t(translationKey)&lt;/code&gt; returns &lt;em&gt;translationKey&lt;/em&gt; in the rendered output.&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// /src/components/TestComponent.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; i18nVitestMock &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@src/mocks/i18nVitestMock&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;@testing-library/jest-dom&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; vi &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;vitest&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;i18nVitestMock&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then call &lt;code&gt;i18nVitestMock()&lt;/code&gt; at the head of the test file.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Fedora Silverblue</title>
+    <link href="https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/" />
+    <updated>2024-11-16T00:00:00Z</updated>
+    <id>https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/</id>
+    <content type="html">&lt;p&gt;I like to try out different linux distributions.
+Part of it is testing how how different groups implement some of the same ideas,
+but part is due to inevitably finding rough edges as an install ages over time.
+At the same time, there are parts of a linux install that I find annoying.
+The big ones are hardware compatibility and desktop environments.
+To be fair, I&#39;ve never had a clean setup on MSWindows either.&lt;/p&gt;
+&lt;p&gt;My latest go at this is &lt;a href=&quot;https://fedoraproject.org/atomic-desktops/silverblue/&quot;&gt;Fedora Silverblue&lt;/a&gt;.
+Silverblue is one of Fedora&#39;s atomic operating system variants.
+Atomic here means that base operating system updates happen as one reversible chunk
+rather than file-by-file which is typical.
+The base system and utilities are declared immutable,
+at least for binaries.
+Some configuration files can be changed as normal.&lt;/p&gt;
+&lt;p&gt;How are you supposed to install software?
+For applications that run in the shell,
+the preferred method is to run OCI (Docker) containers
+with personalized or specialized installs.
+Silverblue ships with &lt;code&gt;toolbox&lt;/code&gt; a utility to
+download and install selected images
+that are configured to work with the host operating system
+including Wayland and port forwarding.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;toolbox&lt;/code&gt; is compatible with &lt;a href=&quot;https://distrobox.it/#distrobox&quot;&gt;Distrobox&lt;/a&gt;,
+which provides more features and support for additional linux distributions.
+Currently I have arch, bazzite-arch, and alpine ready to run.
+&lt;a href=&quot;https://github.com/ublue-os/bazzite-arch&quot;&gt;bazzite-arch&lt;/a&gt; is an interesting example of a special-purpose image.
+It comes with multiple apps for linux gaming pre-installed.
+Distrobox also has the ability to assign different home folders to containers.
+By default they all use the same home folder, which makes accessing files convenient.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/distrobox_list.png&quot; alt=&quot;List of distrobox images including arch, bazzite-arch, and alpine&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Forwarding of graphical windows from a container to the Siverblue host works well.
+Distrobox also has a utility to export desktop menu information
+so I can launch apps directly from the Gnome desktop. (How do games play?
+I&#39;ve had mixed results but I don&#39;t have a gaming laptop
+and have not done a lot of testing here.)
+There are some minor glitches but few consistent problems.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/lutris_screenshot.png&quot; alt=&quot;My election survival toolkit on Lutris&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Lutris running from bazzite-arch container&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://example.com/kaesluder.github.io/blog/2024-11-09-silverblue/content/images/xeyes_screenshot.png&quot; alt=&quot;Biblically Accurate Xeyes&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Biblically Accurate Xeyes&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The switch also included jumping into Gnome for the first time in several years.
+Mostly I&#39;ve been sticking with KDE but have been wanting a change focused on minimizing distractions.
+Gnome does well with the everything full-screen style I prefer,
+without the radical changes imposed by tiling WMs.
+Flatpak is the preferred method for installing graphical software,
+including firefox, chrome, media players, and terminal emulators.&lt;/p&gt;
+&lt;p&gt;The base operating system can be changed using &lt;code&gt;rpm-ostree&lt;/code&gt;,
+&lt;a href=&quot;https://coreos.github.io/rpm-ostree/&quot;&gt;another image-based package system&lt;/a&gt;.
+This raises another complication if you&#39;re going beyond Flatpak.
+My laptop now has two container systems, three container managers,
+and separate package managers and collections for each container.
+I don&#39;t mind, but it could be confusing to have too many other systems running as clients.&lt;/p&gt;
+&lt;p&gt;There are related projects supporting different WMs and Desktop environments:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://fedoraproject.org/atomic-desktops/&quot;&gt;Fedora Atomic Desktops&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://aeondesktop.github.io/&quot;&gt;OpenSUSE Aeon&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://universal-blue.org/&quot;&gt;universal blue images&lt;/a&gt; (Fedora Atomic with additional customization)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Overall it&#39;s been an easy and comfortable experience so far.
+There are a few glitches here and there,
+primarily due to flatpak permissions,
+but overall it provides a solid base for experimentation.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

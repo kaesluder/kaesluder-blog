@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>14 June 2025: Cut-Ups, Simplified Krell Patch</title>
+		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
+		<link rel="alternate" href="/kaesluder.github.io/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace:
+		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #c0c0c0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050f;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #c0c0c0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img {
+	max-width: 100%;
+}
+img[width][height] {
+	height: auto;
+}
+img[src$=".svg"] {
+	width: 100%;
+	height: auto;
+	max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: 0.5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: 0.5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+}
+.postlist-item {
+	display: flex;
+	align-items: baseline;
+	margin-bottom: 1em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333;
+}
+
+.postlist-iconbox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-flow: row;
+	gap: 0.25em;
+	margin-right: 0.5em;
+	align-items: start;
+	justify-items: center;
+	font-size: 24px;
+}
+
+.postlist-iconbox > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 24px; /* Set consistent height for grid cells */
+	width: 24px; /* Set consistent height for grid cells */
+	margin: 2px;
+}
+
+.postlist-iconbox i {
+	font-size: 2ex; /* Set font size to match height for FontAwesome icons */
+	line-height: 1;
+}
+.postlist-item:before {
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 0.5rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: 0.25em;
+	padding-right: 0.5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<script src="https://kit.fontawesome.com/400e27f1db.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/kaesluder.github.io/" class="home-link">Kae Job Sluder</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/kaesluder.github.io/">Home</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/about/">About</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="14-june-2025-cut-ups-simplified-krell-patch">14 June 2025: Cut-Ups, Simplified Krell Patch</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-06-14">14 June 2025</time></li>
+	<li><a href="/kaesluder.github.io/tags/link/" class="post-tag">link</a>, </li>
+	<li><a href="/kaesluder.github.io/tags/ruby/" class="post-tag">ruby</a></li>
+</ul>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UrfFHzqGBZI?si=fEakddz0v1WR7Epk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<h2 id="cut-ups-and-solo-ttrpg-play">Cut-Ups and Solo TTRPG Play</h2>
+<p><a href="https://www.forbes.com/sites/robwieland/2023/11/25/now-is-a-great-time-to-check-out-solo-roleplaying/">Solo Roleplaying</a> combines elements of traditional tabletop RPGs like <em>Dungeons and Dragons,</em> creative journaling, and the use of divination oracles as a means for brainstroming and reflection. The games use oracles such as random dice tables, tarot, or playing cards to create an element of challenge and surpise usually provided by gamemasters or (in the case of computer-rpgs) game-design teams.</p>
+<p>Lately I've been experimenting with <a href="https://en.wikipedia.org/wiki/Cut-up_technique">cut-up techniques</a> as a way to drive scenes and plot developments. a more direct TTRPG implementation is included in the <a href="https://www.drivethrurpg.com/en/product/319632/tilt-an-oracle-for-solo-roleplaying">Tilt: An oracle for solo roleplaying</a>.</p>
+<p>Primarily I've been using song lyrics because poetry offers a high level of imagery per word. The process I use involves the following steps:</p>
+<ol>
+<li>Collection</li>
+<li>Curation</li>
+<li>Random Draws</li>
+<li>Editing</li>
+</ol>
+<p>Collection: Pulling text from sources that match the overall theme of the current game. In the example below, I started with music that felt personally and/or politically apocalyptic (even if the song isn't necessarily science fiction themed). After a few trials, I added in some additional texts to fill in some missing pieces (in this case, &quot;Building Steam with a Grain of Salt,&quot; &quot;Not,&quot; and &quot;Many Moons&quot;). These get copied into a markdown file with source citations at the top and lyrics below.</p>
+<pre class="language-markdown" tabindex="0"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> music for scifi game</span>
+
+<span class="token title important"><span class="token punctuation">##</span> Sources</span>
+
+<span class="token list punctuation">-</span> St. Vincent, "Los Ageless"
+<span class="token list punctuation">-</span> Beast in Black, "Moonlight Rendezvous"
+<span class="token list punctuation">-</span> Reliqa, "E.O.D."
+<span class="token list punctuation">-</span> Reliqa, "Cold World"
+<span class="token list punctuation">-</span> Frozen Crown, "I am the Tyrant"
+<span class="token list punctuation">-</span> Rolling Stones, "Paint it Black"
+<span class="token list punctuation">-</span> DJ Shadow, "Building Steam with a Grain of Salt"
+<span class="token list punctuation">-</span> Patti Smith (orig Springsteen), "Because the Night"
+<span class="token list punctuation">-</span> Leonard Cohen, "You Want it Darker"
+<span class="token list punctuation">-</span> Big Thief, "Not"
+<span class="token list punctuation">-</span> Janelle Monae, "Many Moons"
+
+<span class="token title important"><span class="token punctuation">##</span> Text</span>
+
+In Los Ageless,
+the winter never comes
+the mothers milk their young
+But I can keep running
+...</code></pre>
+<p>Curation: I edit down the original text to get rid of repeated lines. I also break up lines to get a single idea per line,</p>
+<p>Random Draws: I use the simple unix command line <code>tail -n +18 music_scifi.md | shuf | head -n 15</code>. (Remove the first 18 lines (sources), shuffle all the lines, take the first 15 lines.)</p>
+<p>Editing: Further edit the result to fit the situation and grammar. For example, a response to &quot;What really motivates the antagonist?&quot;:</p>
+<pre class="language-markdown" tabindex="0"><code class="language-markdown">Is there a lullaby for suffering? ("You Want it Darker")
+Come on now, try to understand ("Because the Night")
+My doubts make me alone ("Because the Night")
+Not your stable words ("Not")</code></pre>
+<p>Through the process of sifting and editing, a previously flat antagonist now has depth, a motivation, and a possible weakness.</p>
+<h2 id="sonic-pi-a-krell-ish-experiment">Sonic Pi: A Krell-ish Experiment</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oNKhju6Pryg?si=SrIF1OpmEpfHI2fk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<p>Bebe and Louis Barron's soundtrack work for <em>Forbidden Planet</em> is considered to be one of the first examples of generative electronic music in cinema. It's also a project that's often imitated because it includes pitch, envelope, and filter randomization. Here's a simplified attempt at a &quot;krell patch&quot; implemented in sonic pi:</p>
+<pre class="language-ruby" tabindex="0"><code class="language-ruby"><span class="token comment"># Welcome to Sonic Pi</span>
+
+define <span class="token symbol">:three_d_6</span> <span class="token keyword">do</span>
+  result <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token number">3.</span>times <span class="token keyword">do</span>
+    result <span class="token operator">+=</span> dice <span class="token number">6</span>
+  <span class="token keyword">end</span>
+  puts result
+  result
+<span class="token keyword">end</span>
+
+time_scale <span class="token operator">=</span> <span class="token number">0.25</span>
+note_slide <span class="token operator">=</span> <span class="token number">1</span>
+ring_mod_freq <span class="token operator">=</span> <span class="token number">60</span>
+
+with_fx <span class="token symbol">:ring_mod</span><span class="token punctuation">,</span> <span class="token symbol">mix</span><span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token symbol">freq</span><span class="token operator">:</span> ring_mod_freq <span class="token keyword">do</span>
+  <span class="token number">3.</span>times <span class="token keyword">do</span>
+    attack <span class="token operator">=</span> three_d_6 <span class="token operator">*</span> time_scale
+    release <span class="token operator">=</span> three_d_6 <span class="token operator">*</span> time_scale
+    note <span class="token operator">=</span> <span class="token number">70</span> <span class="token operator">+</span> rrand<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">12</span><span class="token punctuation">)</span>
+    use_synth <span class="token symbol">:fm</span>
+    play note<span class="token punctuation">,</span> <span class="token symbol">attack</span><span class="token operator">:</span> attack<span class="token punctuation">,</span> <span class="token symbol">release</span><span class="token operator">:</span> release<span class="token punctuation">,</span> <span class="token symbol">note_slide</span><span class="token operator">:</span> note_slide
+    use_synth <span class="token symbol">:chipbass</span>
+    play note <span class="token operator">-</span> rrand<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token symbol">attack</span><span class="token operator">:</span> attack<span class="token punctuation">,</span> <span class="token symbol">release</span><span class="token operator">:</span> release<span class="token punctuation">,</span> <span class="token symbol">note_slide</span><span class="token operator">:</span> note_slide
+    sleep attack <span class="token operator">+</span> release <span class="token operator">+</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre>
+<h2 id="work-research">Work Research</h2>
+<ul>
+<li><a href="https://github.com/scenic-views/scenic">senic gem</a> - Ruby gem for for managing postgres views.</li>
+<li><a href="https://medium.com/@snapsheetclaims/our-journey-exploring-the-magic-of-views-in-rails-applications-28e5b3797254">Our Journey: Exploring the Magic of Views in Rails Applications</a></li>
+<li><a href="https://alisepehri.medium.com/how-to-create-database-views-in-ruby-on-rails-537f1a981e3d">How to create Database Views in Ruby on Rails?</a></li>
+<li><a href="https://www.usebruno.com/">Bruno</a> - new postman substitute that uses github for synchronizing collections</li>
+</ul>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder.github.io/blog/2025-06-07-link-post-2025-07/">7 June 2025: Link Post</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder.github.io/blog/2025-06-21-zed-and-other-tricks/">21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p>
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/blog/2025-06-14-cut-ups-krell/` was built on 2025-06-29T18:35:50.922Z -->
+		<script type="module" src="/kaesluder.github.io/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>

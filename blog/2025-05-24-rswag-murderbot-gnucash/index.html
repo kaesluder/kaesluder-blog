@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>24 May 2025, rswag and Murderbot</title>
+		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
+		<link rel="alternate" href="/kaesluder.github.io/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace:
+		Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #c0c0c0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050f;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #c0c0c0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img {
+	max-width: 100%;
+}
+img[width][height] {
+	height: auto;
+}
+img[src$=".svg"] {
+	width: 100%;
+	height: auto;
+	max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: 0.5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: 0.5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+}
+.postlist-item {
+	display: flex;
+	align-items: baseline;
+	margin-bottom: 1em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333;
+}
+
+.postlist-iconbox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-flow: row;
+	gap: 0.25em;
+	margin-right: 0.5em;
+	align-items: start;
+	justify-items: center;
+	font-size: 24px;
+}
+
+.postlist-iconbox > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 24px; /* Set consistent height for grid cells */
+	width: 24px; /* Set consistent height for grid cells */
+	margin: 2px;
+}
+
+.postlist-iconbox i {
+	font-size: 2ex; /* Set font size to match height for FontAwesome icons */
+	line-height: 1;
+}
+.postlist-item:before {
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 0.5rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: 0.25em;
+	padding-right: 0.5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<script src="https://kit.fontawesome.com/400e27f1db.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/kaesluder.github.io/" class="home-link">Kae Job Sluder</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/kaesluder.github.io/">Home</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/blog/">Archive</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/about/">About</a></li>
+					<li class="nav-item"><a href="/kaesluder.github.io/feed/feed.xml">Feed</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+<h1 id="24-may-2025-rswag-and-murderbot">24 May 2025, rswag and Murderbot</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-05-24">24 May 2025</time></li>
+	<li><a href="/kaesluder.github.io/tags/ruby/" class="post-tag">ruby</a>, </li>
+	<li><a href="/kaesluder.github.io/tags/tv/" class="post-tag">tv</a></li>
+</ul>
+
+<h3 id="rswag">rswag</h3>
+<p>Programming: Created a self-documenting API endpoint using
+<a href="https://github.com/rswag/rswag">rswag</a>.</p>
+<ol>
+<li>Optional: Define json schema for responses.</li>
+</ol>
+<pre class="language-json" tabindex="0"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"$schema"</span><span class="token operator">:</span> <span class="token string">"http://json-schema.org/draft-07/schema#"</span><span class="token punctuation">,</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"object"</span><span class="token punctuation">,</span>
+  <span class="token property">"properties"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"valid"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"boolean"</span><span class="token punctuation">,</span> <span class="token property">"enum"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"message"</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"string"</span><span class="token punctuation">,</span> <span class="token property">"enum"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"Valid working name"</span><span class="token punctuation">]</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"required"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"valid"</span><span class="token punctuation">,</span> <span class="token string">"message"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+<ol start="2">
+<li>Use rswag and rspec DSLs to define interactions. The <code>check_working_name</code>
+endpoint takes a single parameter <code>working_name</code> and returns a valid or
+invalid status.</li>
+</ol>
+<pre class="language-ruby" tabindex="0"><code class="language-ruby"><span class="token comment"># incomplete code example</span>
+path <span class="token string-literal"><span class="token string">'/api/check_working_name'</span></span> <span class="token keyword">do</span>
+   existing_working_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"this exists in database"</span></span>
+   new_working_name <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"this does not exist in database"</span></span>
+
+   <span class="token comment"># add a new :data_object to the database.</span>
+   let<span class="token operator">!</span><span class="token punctuation">(</span><span class="token symbol">:data_object1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> create<span class="token punctuation">(</span><span class="token symbol">:data_object</span><span class="token punctuation">,</span> <span class="token symbol">working_name</span><span class="token operator">:</span> existing_working_name<span class="token punctuation">)</span> <span class="token punctuation">}</span>
+   parameter name<span class="token operator">:</span> <span class="token symbol">:working_name</span><span class="token punctuation">,</span> <span class="token symbol">in</span><span class="token operator">:</span> <span class="token symbol">:query</span><span class="token punctuation">,</span> <span class="token symbol">type</span><span class="token operator">:</span> <span class="token symbol">:string</span><span class="token punctuation">,</span>
+    <span class="token symbol">required</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token symbol">description</span><span class="token operator">:</span> <span class="token string-literal"><span class="token string">'Working name to validate'</span></span>
+
+   get<span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'check_working_name lookup'</span></span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+     tags <span class="token string-literal"><span class="token string">'Lookup'</span></span>
+     produces <span class="token string-literal"><span class="token string">'application/json'</span></span>
+
+     response<span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string-literal"><span class="token string">'Valid Working name'</span></span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+       let<span class="token punctuation">(</span><span class="token symbol">:working_name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> new_working_name <span class="token punctuation">}</span>
+       contract_schema <span class="token string-literal"><span class="token string">'lookups/check_working_name_valid'</span></span>
+       run_test<span class="token operator">!</span>
+     <span class="token keyword">end</span>
+   <span class="token keyword">end</span>
+<span class="token keyword">end</span></code></pre>
+<ol start="3">
+<li>Create swagger documentation.</li>
+</ol>
+<pre class="language-sh" tabindex="0"><code class="language-sh">bundle <span class="token builtin class-name">exec</span> rake rswag:specs:swaggerize</code></pre>
+<h2 id="murderbot">Murderbot</h2>
+<p><em>Murderbot</em> is the AppleTV adaptation of <em>The Murderbot Diaries</em> by Martha
+Wells. The series centers on <em>Murderbot</em> a cyborg Security Unit who develops
+human relationships and passes for human. Unlike most robot stories, Murderbot
+has no desire to become human, just be accepted on its own terms. The book
+series may not have started using Murderbot as a metaphor for neurodivergence,
+but that framing has been accepted by the author and incorporated into the
+screenplay for the TV adaptation.</p>
+<p>Parallel to this, there's been
+<a href="https://media.ed.ac.uk/media/DiSI+Animation+2.0/1_62bchtwd">new research</a> on
+the double empathy problem of autism. The double empathy problem suggests that
+for low-needs autistic people, difficulties in communication come primarily from
+differences in communication style rather than social deficits. Anecdotal
+evidence and limited studies find that autistic people communicate with high
+accuracy with other autistic people, but communication in mixed
+autistic/non-autistic is worse than in homogeneous groups.</p>
+<p>Most of the comedy in Murderbot comes from differences in communication styles.
+Murderbot visual sees the world through multiple cameras, the humans around it
+want face-to-face communication and eye contact. The human characters
+communicate care and consensus through physical touch, Murderbot prefers to
+stand in a corner. The humans thrive by communicating emotions, Murderbot
+processes massive amounts of data that can't be expressed in human terms.</p>
+<p>These ideas may be exaggerated compared to ND/NT differences, but many people
+find them to be relatable.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder.github.io/blog/2025-05-17-learning/">React and Vue: Two Weeks Learning Reflections</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder.github.io/blog/2025-06-01-double-entry-accounting-experiments/">1 June 2025: DIY, Double-Entry Accounting, and Shameless Green</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p>
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/blog/2025-05-24-rswag-murderbot-gnucash/` was built on 2025-06-29T18:35:50.922Z -->
+		<script type="module" src="/kaesluder.github.io/dist/xbxy_EL6cU.js"></script>
+	</body>
+</html>
