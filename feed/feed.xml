@@ -12,13 +12,13 @@
   </author>
   <entry>
     <title>28 June 2025: Shuffle and Backup</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/" />
+    <link href="https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/" />
     <updated>2025-06-28T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/</id>
+    <id>https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-CR628yT7aE?si=kFxctrIzZ27sry7c&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;h2 id=&quot;visual-card-shuffle&quot;&gt;Visual Card Shuffle&lt;/h2&gt;
 &lt;p&gt;Continuing my exploration of &lt;a href=&quot;https://example.com/kaesluder-blog/posts/cut-ups-krell/&quot;&gt;cut-ups&lt;/a&gt; my sourcing interesting images from Wikimedia Commons and the Met Open Access collection. Then I shuffle the images and arrange nine of them on a grid:&lt;/p&gt;
-&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.avif 834w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.webp 834w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/2025-06-28-image-shuffle-and-backup-hosting/ssn3u3mX8W-834.png&quot; alt=&quot;screenshot of web interface with photo tiles arranged in a 3 by 3 grid&quot; width=&quot;834&quot; height=&quot;721&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
+&lt;p&gt;&lt;picture&gt;&lt;source type=&quot;image/avif&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/ssn3u3mX8W-834.avif 834w&quot;&gt;&lt;source type=&quot;image/webp&quot; srcset=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/ssn3u3mX8W-834.webp 834w&quot;&gt;&lt;img loading=&quot;lazy&quot; decoding=&quot;async&quot; src=&quot;https://example.com/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/ssn3u3mX8W-834.png&quot; alt=&quot;screenshot of web interface with photo tiles arranged in a 3 by 3 grid&quot; width=&quot;834&quot; height=&quot;721&quot;&gt;&lt;/picture&gt;&lt;/p&gt;
 &lt;p&gt;Pain points:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Image manipulation in css: My original idea was to use css to zoom in on random sections of each image, hoping for some creative serendipity. After an evening struggling with this. I gave up and started curating square tiles manually. The result is a bit creatively more satisfying, and it&#39;s a nice easy low-bandwidth task.&lt;/li&gt;
