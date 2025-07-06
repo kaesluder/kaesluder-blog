@@ -16,7 +16,31 @@ const TAG_ICON_MAP = {
 	vue: "fab fa-vuejs",
 	tv: "fas fa-tv",
 	ruby: "far fa-gem", // Ruby doesn't have a direct FA icon
+	music: "fas fa-music",
 };
+
+const TOP_NAV_LIST = [
+	// {
+	// 	key: "home",
+	// 	url: "https://kaesluder.github.io/",
+	// 	title: "Home",
+	// },
+	{
+		key: "blog",
+		url: "/blog/",
+		title: "Blog",
+	},
+	{
+		key: "tags",
+		url: "/tags/",
+		title: "Tags",
+	},
+	{
+		key: "feed",
+		url: "/feed/feed.xml",
+		title: "RSS",
+	},
+];
 
 import pluginFilters from "./_config/filters.js";
 
@@ -94,6 +118,8 @@ export default async function (eleventyConfig) {
 			},
 		},
 	});
+
+	eleventyConfig.addGlobalData("nav_list", TOP_NAV_LIST);
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
