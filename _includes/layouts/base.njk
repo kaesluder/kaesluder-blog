@@ -71,5 +71,10 @@
 
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+		{%- if mermaid %}
+		<script type="module" eleventy:ignore>
+		  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+		</script>
+		{%- endif %}
 	</body>
 </html>

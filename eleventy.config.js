@@ -133,6 +133,10 @@ export default async function (eleventyConfig) {
 		return TAG_ICON_MAP[tag] || "";
 	});
 
+	eleventyConfig.addPairedShortcode("mermaid", function (content) {
+		return `<pre class="mermaid">${content}</pre>`;
+	});
+
 	// Features to make your build faster (when you need them)
 
 	// If your passthrough copy gets heavy and cumbersome, add this line
