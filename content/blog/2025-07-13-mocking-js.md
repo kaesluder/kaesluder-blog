@@ -1,6 +1,6 @@
 ---js
 const title = '13 July 2025: Vitest Mocking';
-const date = "2025-07-12";
+const date = "2025-07-13";
 const draft = false;
 const tags = ["javascript"];
 const mermaid = true;
