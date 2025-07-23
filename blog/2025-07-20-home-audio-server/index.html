@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>React and Vue: Two Weeks Learning Reflections</title>
+		<title>20 July 2025: Home Music Server Setup</title>
 		<meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
 		<link rel="alternate" href="/kaesluder-blog/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
 		
@@ -528,46 +528,27 @@ pre[class*="language-diff-"] {
 
 
 
-<h1 id="react-and-vue-two-weeks-learning-reflections">React and Vue: Two Weeks Learning Reflections</h1>
+<h1 id="20-july-2025-home-music-server-setup">20 July 2025: Home Music Server Setup</h1>
 
 <ul class="post-metadata">
-	<li><time datetime="2025-05-17">17 May 2025</time></li>
-	<li><a href="/kaesluder-blog/tags/react/" class="post-tag">react</a>, </li>
-	<li><a href="/kaesluder-blog/tags/vue/" class="post-tag">vue</a></li>
+	<li><time datetime="2025-07-20">20 July 2025</time></li>
+	<li><a href="/kaesluder-blog/tags/music/" class="post-tag">music</a>, </li>
+	<li><a href="/kaesluder-blog/tags/linux/" class="post-tag">linux</a></li>
 </ul>
 
-<p>A current project is to implement Plaid account configuration for customers.
-Unfortunately, Plaid is not quite compatible with what we need or our legacy
-code for international accounts. Our plaid interface includes some followup
-questions and confirmation the user wants to use this account to make payments
-through our system. The first step is to get it working for our legacy interface
-which uses Vue3. We'll have to rebuild this for our upcoming dashboard later in
-the year.</p>
-<p>Documenting some pain points switching gears.</p>
-<h2 id="vue-options-api-vs-compose-api">Vue Options API vs. Compose API</h2>
-<p>I started with a proof-of-concept produced by a teammate that used the Options
-API, while a number of examples available to me used the Composition API. (See
-<a href="https://vueschool.io/articles/vuejs-tutorials/options-api-vs-composition-api/">article at Vue School for explanation.</a>)
-Options API exports an object with sections for data, methods, computed values,
-properties, and other parts needed during the component lifecycle. Composition
-API defines many of the same features using more traditional JS. Using Options,
-it was sometimes confusing whether I needed a <em>method</em> or a <em>computed</em>
-expression. It made sense once I got into it.</p>
-<h2 id="field-binding-vs-state-setters">Field Binding vs. State Setters</h2>
-<p>Vue binds data directly to <code>input</code> fields which makes some things very easy
-compared to React
-<a href="https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable">controlled input fields</a>.
-Usually I find that the implicit data modification used by Vue to be more
-confusing than explicit setters. Once I knew what to look for, it wasn't a
-problem.</p>
-<h2 id="template-vs-jsx">Template vs. JSX</h2>
-<p>Vue's file layout mirrors an html file with setup performed in a <code>&lt;script&gt;</code> tag.
-This includes additional tag definitions for conditional and iteration logic. Vue's
-template approach (mostly) separates code from presentation. React uses JSX where
-&quot;tags&quot; are rendered function expressions. Vue's templates are similar enough to other
-html templating that it's not a big deal.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9iJQQTg5_Kg?si=0_bZniuXGMVmfrEG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<p>Prepping for a move in October and working on digitizing old cds and setting up a backup server. Not creative work but productive.</p>
+<ul>
+<li>Raspberry Pi 4 running <a href="https://www.raspberrypi.com/software/operating-systems/">Raspberry Pi OS</a>. The Pi was left over from another project a few years ago. Setting it up for headless operation was pretty easy following instructions. Using an external HDD and an enclosure, also from an earlier project.</li>
+<li>Basic <a href="https://ubuntu.com/tutorials/install-and-configure-samba">Samba</a> setup with a <code>Music</code> folder.</li>
+<li><a href="https://www.navidrome.org/">Navidrome</a> music server.</li>
+<li>Ripping: <a href="http://littlesvr.ca/asunder/">Asunder</a> and <a href="https://picard.musicbrainz.org/">Musicbrainz Picard</a> for tagging/organization.</li>
+</ul>
+<p>A goal is to move away from depending on streaming services to personal music curation. Some of the discoveries from the archives include some independently published local music by hometown bands like <a href="https://www.salaamband.com/">Salaam</a> and a Live From Bloomington project I've not found on the internet. Also discovering CDs I didn't know we had, like three Beatles collections and a Siouxsie and the Banshees single.</p>
+<p>I started a practice in spring of putting notable songs on a year playlist. It just crossed 100 songs:</p>
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2046291804&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/kae-sluder" title="Kae Sluder" target="_blank" style="color: #cccccc; text-decoration: none;">Kae Sluder</a> · <a href="https://soundcloud.com/kae-sluder/sets/2025-daily" title="2025 Daily" target="_blank" style="color: #cccccc; text-decoration: none;">2025 Daily</a></div>
 
-<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-04-13-link-post/">April 2025 Link Post</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder-blog/blog/2025-05-24-rswag-murderbot-gnucash/">24 May 2025, rswag and Murderbot</a></li>
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-07-13-mocking-js/">13 July 2025: Vitest Mocking</a></li>
 </ul>
 
 			</heading-anchors>
@@ -579,7 +560,7 @@ html templating that it's not a big deal.</p>
 			</p>
 		</footer>
 
-		<!-- This page `/blog/2025-05-17-learning/` was built on 2025-07-23T17:34:47.721Z -->
+		<!-- This page `/blog/2025-07-20-home-audio-server/` was built on 2025-07-23T17:34:47.722Z -->
 		<script type="module" src="/kaesluder-blog/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>

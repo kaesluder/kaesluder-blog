@@ -5,15 +5,33 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-07-12T00:00:00Z</updated>
+  <updated>2025-07-20T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
   <entry>
+    <title>20 July 2025: Home Music Server Setup</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-07-20-home-audio-server/" />
+    <updated>2025-07-20T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-07-20-home-audio-server/</id>
+    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/9iJQQTg5_Kg?si=0_bZniuXGMVmfrEG&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Prepping for a move in October and working on digitizing old cds and setting up a backup server. Not creative work but productive.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Raspberry Pi 4 running &lt;a href=&quot;https://www.raspberrypi.com/software/operating-systems/&quot;&gt;Raspberry Pi OS&lt;/a&gt;. The Pi was left over from another project a few years ago. Setting it up for headless operation was pretty easy following instructions. Using an external HDD and an enclosure, also from an earlier project.&lt;/li&gt;
+&lt;li&gt;Basic &lt;a href=&quot;https://ubuntu.com/tutorials/install-and-configure-samba&quot;&gt;Samba&lt;/a&gt; setup with a &lt;code&gt;Music&lt;/code&gt; folder.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.navidrome.org/&quot;&gt;Navidrome&lt;/a&gt; music server.&lt;/li&gt;
+&lt;li&gt;Ripping: &lt;a href=&quot;http://littlesvr.ca/asunder/&quot;&gt;Asunder&lt;/a&gt; and &lt;a href=&quot;https://picard.musicbrainz.org/&quot;&gt;Musicbrainz Picard&lt;/a&gt; for tagging/organization.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A goal is to move away from depending on streaming services to personal music curation. Some of the discoveries from the archives include some independently published local music by hometown bands like &lt;a href=&quot;https://www.salaamband.com/&quot;&gt;Salaam&lt;/a&gt; and a Live From Bloomington project I&#39;ve not found on the internet. Also discovering CDs I didn&#39;t know we had, like three Beatles collections and a Siouxsie and the Banshees single.&lt;/p&gt;
+&lt;p&gt;I started a practice in spring of putting notable songs on a year playlist. It just crossed 100 songs:&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allow=&quot;autoplay&quot; src=&quot;https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2046291804&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true&quot;&gt;&lt;/iframe&gt;&lt;div style=&quot;font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;&quot;&gt;&lt;a href=&quot;https://soundcloud.com/kae-sluder&quot; title=&quot;Kae Sluder&quot; target=&quot;_blank&quot; style=&quot;color: #cccccc; text-decoration: none;&quot;&gt;Kae Sluder&lt;/a&gt; · &lt;a href=&quot;https://soundcloud.com/kae-sluder/sets/2025-daily&quot; title=&quot;2025 Daily&quot; target=&quot;_blank&quot; style=&quot;color: #cccccc; text-decoration: none;&quot;&gt;2025 Daily&lt;/a&gt;&lt;/div&gt;
+</content>
+  </entry>
+  <entry>
     <title>13 July 2025: Vitest Mocking</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-07-13-mocking-js/" />
-    <updated>2025-07-12T00:00:00Z</updated>
+    <updated>2025-07-13T00:00:00Z</updated>
     <id>https://example.com/kaesluder-blog/blog/2025-07-13-mocking-js/</id>
     <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ZKCGilFFFPk?si=KzYO6xsQ8G_Uemka&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;p&gt;Some notes on vitest after working out a few things. Needed to look beyond the cookbook examples to why vitest and jest mocks work.&lt;/p&gt;
@@ -518,20 +536,6 @@ This includes additional tag definitions for conditional and iteration logic. Vu
 template approach (mostly) separates code from presentation. React uses JSX where
 &amp;quot;tags&amp;quot; are rendered function expressions. Vue&#39;s templates are similar enough to other
 html templating that it&#39;s not a big deal.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>April 2025 Link Post</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-04-13-link-post/" />
-    <updated>2025-04-13T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-04-13-link-post/</id>
-    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/jm-rMP9bvbU?si=wSpbOB9ColZgouJA&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;Various links:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://ndconnection.co.uk/blog/autism-research-march-2025&quot;&gt;March 2025 roundup of useful autism research&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Playing: &lt;a href=&quot;https://oddmentsoh.itch.io/threads&quot;&gt;Threads (itch.io)&lt;/a&gt; a solo or collaborative journaling game for exploring what happens after the RPG campaign ends.&lt;/li&gt;
-&lt;li&gt;Reading: &lt;a href=&quot;https://bellhooksbooks.com/product/all-about-love/&quot;&gt;Bell Hooks, &lt;em&gt;All About Love&lt;/em&gt;&lt;/a&gt; trying to get out of internet soundbite churn by picking up some reading.&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
