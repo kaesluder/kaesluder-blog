@@ -48,6 +48,6 @@
 	},
 	"dependencies": {
 		"@zachleat/heading-anchors": "^1.0.3",
-		"markdown-it-mermaid": "^0.2.5"
+		"markdown-it-mermaid": "^0.2.0"
 	}
 }
