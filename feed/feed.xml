@@ -5,11 +5,47 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-07-20T00:00:00Z</updated>
+  <updated>2025-08-03T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
+  <entry>
+    <title>3 August 2025: Documentation Wishlist</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-08-03-doc-wishlist/" />
+    <updated>2025-08-03T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-08-03-doc-wishlist/</id>
+    <content type="html">&lt;h2 id=&quot;documentation-wishlist&quot;&gt;Documentation Wishlist&lt;/h2&gt;
+&lt;p&gt;Most of these are things I had to reverse engineer refactoring a wizard component. And I&#39;ll probably forget all of this in six months when I&#39;m asked to do a bugfix.&lt;/p&gt;
+&lt;h3 id=&quot;module-level-readme-md&quot;&gt;Module Level (README.md)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;What are the UI frameworks and dependencies, and where can I find documentation?&lt;/li&gt;
+&lt;li&gt;What are the build requirements and process?&lt;/li&gt;
+&lt;li&gt;What are needed environment variables?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;linked-components-readme-folder-md&quot;&gt;Linked Components (README.folder.md)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;What is the goal or task?&lt;/li&gt;
+&lt;li&gt;Is there a component hierarchy? What is it?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;functions&quot;&gt;Functions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Description: What is the business/ui purpose of this function?&lt;/li&gt;
+&lt;li&gt;Parameters&lt;/li&gt;
+&lt;li&gt;Return values&lt;/li&gt;
+&lt;li&gt;Error handling&lt;/li&gt;
+&lt;li&gt;Exceptions&lt;/li&gt;
+&lt;li&gt;Events&lt;/li&gt;
+&lt;li&gt;Side effects/state changes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;august-goals&quot;&gt;August Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Get a deeper understanding of how JavaScript handles fundamental variables and functions.&lt;/li&gt;
+&lt;li&gt;Continue learning Czech.&lt;/li&gt;
+&lt;li&gt;Finish bell hooks, &lt;em&gt;All About Love&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>20 July 2025: Home Music Server Setup</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-07-20-home-audio-server/" />
@@ -499,43 +535,6 @@ stand in a corner. The humans thrive by communicating emotions, Murderbot
 processes massive amounts of data that can&#39;t be expressed in human terms.&lt;/p&gt;
 &lt;p&gt;These ideas may be exaggerated compared to ND/NT differences, but many people
 find them to be relatable.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>React and Vue: Two Weeks Learning Reflections</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-05-17-learning/" />
-    <updated>2025-05-17T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-05-17-learning/</id>
-    <content type="html">&lt;p&gt;A current project is to implement Plaid account configuration for customers.
-Unfortunately, Plaid is not quite compatible with what we need or our legacy
-code for international accounts. Our plaid interface includes some followup
-questions and confirmation the user wants to use this account to make payments
-through our system. The first step is to get it working for our legacy interface
-which uses Vue3. We&#39;ll have to rebuild this for our upcoming dashboard later in
-the year.&lt;/p&gt;
-&lt;p&gt;Documenting some pain points switching gears.&lt;/p&gt;
-&lt;h2 id=&quot;vue-options-api-vs-compose-api&quot;&gt;Vue Options API vs. Compose API&lt;/h2&gt;
-&lt;p&gt;I started with a proof-of-concept produced by a teammate that used the Options
-API, while a number of examples available to me used the Composition API. (See
-&lt;a href=&quot;https://vueschool.io/articles/vuejs-tutorials/options-api-vs-composition-api/&quot;&gt;article at Vue School for explanation.&lt;/a&gt;)
-Options API exports an object with sections for data, methods, computed values,
-properties, and other parts needed during the component lifecycle. Composition
-API defines many of the same features using more traditional JS. Using Options,
-it was sometimes confusing whether I needed a &lt;em&gt;method&lt;/em&gt; or a &lt;em&gt;computed&lt;/em&gt;
-expression. It made sense once I got into it.&lt;/p&gt;
-&lt;h2 id=&quot;field-binding-vs-state-setters&quot;&gt;Field Binding vs. State Setters&lt;/h2&gt;
-&lt;p&gt;Vue binds data directly to &lt;code&gt;input&lt;/code&gt; fields which makes some things very easy
-compared to React
-&lt;a href=&quot;https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable&quot;&gt;controlled input fields&lt;/a&gt;.
-Usually I find that the implicit data modification used by Vue to be more
-confusing than explicit setters. Once I knew what to look for, it wasn&#39;t a
-problem.&lt;/p&gt;
-&lt;h2 id=&quot;template-vs-jsx&quot;&gt;Template vs. JSX&lt;/h2&gt;
-&lt;p&gt;Vue&#39;s file layout mirrors an html file with setup performed in a &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; tag.
-This includes additional tag definitions for conditional and iteration logic. Vue&#39;s
-template approach (mostly) separates code from presentation. React uses JSX where
-&amp;quot;tags&amp;quot; are rendered function expressions. Vue&#39;s templates are similar enough to other
-html templating that it&#39;s not a big deal.&lt;/p&gt;
 </content>
   </entry>
 </feed>
