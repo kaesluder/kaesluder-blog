@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>23 August 2025: React Reducer Pattern</title>
+		<meta name="description" content="A personal learn-in-public blog, mostly about programming.">
+		<link rel="alternate" href="/kaesluder-blog/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
+		
+		
+		
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace:
+		Courier, Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
+		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
+		Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e3e3e3;
+	--color-gray-50: #c0c0c0;
+	--color-gray-90: #333;
+
+	--text-color: var(--color-gray-20);
+
+	--text-color-link: #1493fb;
+	--text-color-link-active: #6969f7;
+	--text-color-link-visited: #a6a6f8;
+
+	--background-color: #15202b;
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #c0c0c0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* Fluid images via https://www.zachleat.com/web/fluid-images/ */
+img {
+	max-width: 100%;
+}
+img[width][height] {
+	height: auto;
+}
+img[src$=".svg"] {
+	width: 100%;
+	height: auto;
+	max-width: none;
+}
+video,
+iframe {
+	width: 100%;
+	height: auto;
+}
+iframe {
+	aspect-ratio: 16/9;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+
+#skip-link {
+	text-decoration: none;
+	background: var(--background-color);
+	color: var(--text-color);
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--color-gray-90);
+	border-radius: 2px;
+}
+
+/* Prevent visually-hidden skip link fom pushing content around when focused */
+#skip-link.visually-hidden:focus {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	/* Ensure it is positioned on top of everything else when it is shown */
+	z-index: 999;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: 0.5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	flex-grow: 1;
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	gap: 0.5em 1em;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	list-style: none;
+	padding: 0;
+}
+.postlist-item {
+	display: flex;
+	align-items: baseline;
+	margin-bottom: 1em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333;
+}
+
+.postlist-iconbox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-flow: row;
+	gap: 0.25em;
+	margin-right: 0.5em;
+	align-items: start;
+	justify-items: center;
+	font-size: 24px;
+}
+
+.postlist-iconbox > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 24px; /* Set consistent height for grid cells */
+	width: 24px; /* Set consistent height for grid cells */
+	margin: 2px;
+}
+
+.postlist-iconbox i {
+	font-size: 2ex; /* Set font size to match height for FontAwesome icons */
+	line-height: 1;
+}
+.postlist-item:before {
+	pointer-events: none;
+	line-height: 100%;
+	text-align: right;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-20);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+	margin-left: 0.5rem;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: 0.25em;
+	padding-right: 0.5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+/* Mermaid diagrams */
+.mermaid {
+	background-color: white !important;
+}
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #8292a2;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+/*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}</style>
+		
+		<script src="https://kit.fontawesome.com/400e27f1db.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="https://kaesluder.github.io/" class="home-link">Kae Job Sluder</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/kaesluder-blog/blog/">Blog</a></li>
+					<li class="nav-item"><a href="/kaesluder-blog/tags/">Tags</a></li>
+					<li class="nav-item"><a href="/kaesluder-blog/feed/feed.xml">RSS</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="main">
+			<heading-anchors>
+				
+
+
+
+
+<h1 id="23-august-2025-react-reducer-pattern">23 August 2025: React Reducer Pattern</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2025-08-23">23 August 2025</time></li>
+	<li><a href="/kaesluder-blog/tags/javascript/" class="post-tag">javascript</a>, </li>
+	<li><a href="/kaesluder-blog/tags/react/" class="post-tag">react</a></li>
+</ul>
+
+<p>Some of my &quot;side&quot; project work includes prototyping with strategies that I'd like to apply at work. We have moderately complex, legacy Vue and React interfaces that are difficult to test for a variety of reasons. One of my maintenance tasks is look for ways to refactor for testability, and some of the themes for React are:</p>
+<ol>
+<li>Division of application state into multiple <code>useState()</code> variables.</li>
+<li>Internal React variables are not directly observable without rendering. This makes it difficult to test &quot;business&quot; (data modification) logic separate from UI rendering logic.</li>
+<li>Multiple UI events can trigger state changes.</li>
+<li>Tacit updates and component lifecycle events trigger unexpected results and errors.</li>
+</ol>
+<p>The reducer pattern helps to address many of these problems.</p>
+<p><a href="https://github.com/kaesluder/ttrpg-tools">ttrpg-tools</a> is a side project to create a set of creative brainstorming oracles for <a href="https://www.tabletopgaming.co.uk/features/a-beginners-guide-to-solo-tabletop-rpgs/">solo role-playing games</a>. Many of these games include a mechanic that increases the risk of negative events as play continues. Examples include jenga towers and playing card layouts.</p>
+<p>My experimental mechanic uses solitaire blackjack with the addition of a &quot;resource&quot; pile of cards that can be played at any time. The &quot;dealer&quot; represents a hostile environment, and players will need to balance wins and losses to reach the endgame. My first attempt at managing game state through React's <code>useState</code> came out something of a mess, which pushed me to read more about <code>useReducer</code> as an alternative.</p>
+<pre class="mermaid">
+
+erDiagram
+
+		direction LR
+		state ||--|| view : configures
+		state {
+			Card[] playerHand
+			Card[] dealerHand
+			Card[] resources
+			Card[] discardPile
+			number playerScore
+			number dealerScore
+		}
+
+		view ||--|{ actions : sends
+		view {
+			ul playerHand
+			ul dealerHand
+			ul resources
+			div playerScore
+			div dealerScore
+			nav turnNav
+		}
+
+		actions }|--|| reducer : direct
+		actions {
+			action setupRound
+			action playerTurn
+			action playerHit
+			action playerStand
+			action dealerTurn
+			action scoreRound
+		}
+
+		reducer ||--|| state : updates
+		reducer {
+			param state
+			param action
+			returns state
+		}
+</pre>
+<p>Currently the game code consists of four main components, each with their own responsibilities:</p>
+<ul>
+<li><strong>The Game State</strong>: This is a class that manages the deck of cards, and multiple arrays representing a draw pile, player hand, dealer hand, and discard pile. It also contains functions for updating the total score, and calculating the score for each hand. This bundles almost all of the app state.</li>
+<li><strong>The View</strong>: A set of JSX components that is primarily responsible for displaying the current game state as a list of rendered cards and numbers. It also includes an action bar that displays only the actions relevant to each stage, and has minimal event handlers to create <em>actions</em> for the <em>reducer</em>.</li>
+<li><strong>Actions</strong>: Each action is a simple message object that represents a single game events a high level. These are sent to the <em>reducer</em> via a <em>dispatch</em> function. A simple action is:</li>
+</ul>
+<pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token punctuation">{</span>type<span class="token operator">:</span> <span class="token string">'SETUP_ROUND'</span><span class="token punctuation">}</span></code></pre>
+<ul>
+<li><strong>The Reducer</strong>: The <em>reducer</em> is a pure function (not triggering or depending on side effects) that takes the current <em>game state</em> and an <em>action</em>. It reads the action, calls the appropriate methods on the <em>game state</em>, and generates the next <em>game state</em>. It uses <a href="https://immerjs.github.io/immer/">immer</a> to ensure that the new state is an immutable copy.</li>
+</ul>
+<p>The reducer is simply an extended switch statement. Here's a minimal example</p>
+<pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token comment">/**
+ * Create a reducer function using drawPile as the array iterator.
+ * @param {ArrayIterator&lt;Card>} drawPile
+ * @returns {(SurvivalBlackjack, ReducerAction) => SurvivalBlackjack} reducer function
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">makeReducer</span><span class="token punctuation">(</span>
+  drawPile<span class="token operator">:</span> ArrayIterator<span class="token operator">&lt;</span>Card<span class="token operator">></span><span class="token punctuation">,</span> <span class="token comment">// shuffled deck for game</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span>state<span class="token operator">:</span> SurvivalBlackjack<span class="token punctuation">,</span> action<span class="token operator">:</span> ReducerAction<span class="token punctuation">)</span> <span class="token operator">=></span> SurvivalBlackjack <span class="token punctuation">{</span>
+
+	<span class="token comment">// The reducer starts here as a closure.</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">reducer</span><span class="token punctuation">(</span>state<span class="token operator">:</span> SurvivalBlackjack<span class="token punctuation">,</span> action<span class="token operator">:</span> ReducerAction<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// start the game drawing resources</span>
+      <span class="token keyword">case</span> turnStage<span class="token punctuation">.</span>start<span class="token operator">:</span> <span class="token comment">// turnStage is a typescript enum</span>
+        <span class="token keyword">return</span> <span class="token function">produce</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">(</span>state<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span> <span class="token comment">// immer.produce() ensures immutability</span>
+          state <span class="token operator">=</span> state<span class="token punctuation">.</span><span class="token function">setup</span><span class="token punctuation">(</span>drawPile<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setStage</span><span class="token punctuation">(</span>turnStage<span class="token punctuation">.</span>start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span></code></pre>
+<p><code>drawPile</code> is an iterator object with its own internal state. I keep it separate from <code>state</code> to ensure that <code>state</code> can be immutably handled by both React and immer without complications. This is 'passed' into the reducer via a closure. The reducer and initial game state are created early and added to the view with the following line of code:</p>
+<pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token keyword">const</span> <span class="token punctuation">[</span>game<span class="token punctuation">,</span> dispatch<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useReducer</span><span class="token punctuation">(</span>reducer<span class="token punctuation">,</span> initialGame<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>This is parallel to <code>[state, setState] = useState(initialState)</code> State properties can be accessed through <code>game.current</code> for rendering. The view does not directly modify the state, which makes handling events very simple:</p>
+<pre class="language-typescript" tabindex="0"><code class="language-typescript"><span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> sb<span class="token punctuation">.</span>turnStage<span class="token punctuation">.</span>playerTurn <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">></span>
+  Start Game
+<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span></code></pre>
+<p><code>dispatch</code> calls the <em>reducer</em>, captures the new game state, and triggers a redraw. The <em>reducer</em> takes care of round and game management. The <em>state</em> methods take care of game mechanics. Some of the advantages include:</p>
+<ol>
+<li>MVC organization.</li>
+<li>Game management, game mechanics, and display logic can be tested independently.</li>
+<li>Direct access to state properties for testing.</li>
+<li>Game management and game mechanics are not dependent on any UI framework.</li>
+<li>Interdependent states can be managed together, without worrying about the rendering cycle.</li>
+</ol>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-08-15-js-functions-review/">16 August 2025: Reviewing JS Functions</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+			<p>
+				<em>Built with <a href="https://www.11ty.dev/">Eleventy v3.1.2</a></em>
+			</p>
+		</footer>
+
+		<!-- This page `/blog/2025-08-23-react-reducer-pattern/` was built on 2025-08-24T22:43:46.646Z -->
+		<script type="module" src="/kaesluder-blog/dist/xbxy_EL6cU.js"></script>
+		<script type="module">
+		  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+		</script>
+	</body>
+</html>

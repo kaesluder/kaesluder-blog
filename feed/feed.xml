@@ -5,11 +5,113 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-08-16T00:00:00Z</updated>
+  <updated>2025-08-23T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
+  <entry>
+    <title>23 August 2025: React Reducer Pattern</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-08-23-react-reducer-pattern/" />
+    <updated>2025-08-23T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-08-23-react-reducer-pattern/</id>
+    <content type="html">&lt;p&gt;Some of my &amp;quot;side&amp;quot; project work includes prototyping with strategies that I&#39;d like to apply at work. We have moderately complex, legacy Vue and React interfaces that are difficult to test for a variety of reasons. One of my maintenance tasks is look for ways to refactor for testability, and some of the themes for React are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Division of application state into multiple &lt;code&gt;useState()&lt;/code&gt; variables.&lt;/li&gt;
+&lt;li&gt;Internal React variables are not directly observable without rendering. This makes it difficult to test &amp;quot;business&amp;quot; (data modification) logic separate from UI rendering logic.&lt;/li&gt;
+&lt;li&gt;Multiple UI events can trigger state changes.&lt;/li&gt;
+&lt;li&gt;Tacit updates and component lifecycle events trigger unexpected results and errors.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The reducer pattern helps to address many of these problems.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/kaesluder/ttrpg-tools&quot;&gt;ttrpg-tools&lt;/a&gt; is a side project to create a set of creative brainstorming oracles for &lt;a href=&quot;https://www.tabletopgaming.co.uk/features/a-beginners-guide-to-solo-tabletop-rpgs/&quot;&gt;solo role-playing games&lt;/a&gt;. Many of these games include a mechanic that increases the risk of negative events as play continues. Examples include jenga towers and playing card layouts.&lt;/p&gt;
+&lt;p&gt;My experimental mechanic uses solitaire blackjack with the addition of a &amp;quot;resource&amp;quot; pile of cards that can be played at any time. The &amp;quot;dealer&amp;quot; represents a hostile environment, and players will need to balance wins and losses to reach the endgame. My first attempt at managing game state through React&#39;s &lt;code&gt;useState&lt;/code&gt; came out something of a mess, which pushed me to read more about &lt;code&gt;useReducer&lt;/code&gt; as an alternative.&lt;/p&gt;
+&lt;pre class=&quot;mermaid&quot;&gt;
+
+erDiagram
+
+		direction LR
+		state ||--|| view : configures
+		state {
+			Card[] playerHand
+			Card[] dealerHand
+			Card[] resources
+			Card[] discardPile
+			number playerScore
+			number dealerScore
+		}
+
+		view ||--|{ actions : sends
+		view {
+			ul playerHand
+			ul dealerHand
+			ul resources
+			div playerScore
+			div dealerScore
+			nav turnNav
+		}
+
+		actions }|--|| reducer : direct
+		actions {
+			action setupRound
+			action playerTurn
+			action playerHit
+			action playerStand
+			action dealerTurn
+			action scoreRound
+		}
+
+		reducer ||--|| state : updates
+		reducer {
+			param state
+			param action
+			returns state
+		}
+&lt;/pre&gt;
+&lt;p&gt;Currently the game code consists of four main components, each with their own responsibilities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The Game State&lt;/strong&gt;: This is a class that manages the deck of cards, and multiple arrays representing a draw pile, player hand, dealer hand, and discard pile. It also contains functions for updating the total score, and calculating the score for each hand. This bundles almost all of the app state.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The View&lt;/strong&gt;: A set of JSX components that is primarily responsible for displaying the current game state as a list of rendered cards and numbers. It also includes an action bar that displays only the actions relevant to each stage, and has minimal event handlers to create &lt;em&gt;actions&lt;/em&gt; for the &lt;em&gt;reducer&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Actions&lt;/strong&gt;: Each action is a simple message object that represents a single game events a high level. These are sent to the &lt;em&gt;reducer&lt;/em&gt; via a &lt;em&gt;dispatch&lt;/em&gt; function. A simple action is:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&quot;language-typescript&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;type&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;SETUP_ROUND&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;The Reducer&lt;/strong&gt;: The &lt;em&gt;reducer&lt;/em&gt; is a pure function (not triggering or depending on side effects) that takes the current &lt;em&gt;game state&lt;/em&gt; and an &lt;em&gt;action&lt;/em&gt;. It reads the action, calls the appropriate methods on the &lt;em&gt;game state&lt;/em&gt;, and generates the next &lt;em&gt;game state&lt;/em&gt;. It uses &lt;a href=&quot;https://immerjs.github.io/immer/&quot;&gt;immer&lt;/a&gt; to ensure that the new state is an immutable copy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The reducer is simply an extended switch statement. Here&#39;s a minimal example&lt;/p&gt;
+&lt;pre class=&quot;language-typescript&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;/**
+ * Create a reducer function using drawPile as the array iterator.
+ * @param {ArrayIterator&amp;lt;Card&gt;} drawPile
+ * @returns {(SurvivalBlackjack, ReducerAction) =&gt; SurvivalBlackjack} reducer function
+ */&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;makeReducer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  drawPile&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ArrayIterator&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;Card&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// shuffled deck for game&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; SurvivalBlackjack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; action&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ReducerAction&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; SurvivalBlackjack &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;token comment&quot;&gt;// The reducer starts here as a closure.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;reducer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; SurvivalBlackjack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; action&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ReducerAction&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;action&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;type&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// start the game drawing resources&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; turnStage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;start&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// turnStage is a typescript enum&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;produce&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;state&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// immer.produce() ensures immutability&lt;/span&gt;
+          state &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; state&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;drawPile&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setStage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;turnStage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;start&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;drawPile&lt;/code&gt; is an iterator object with its own internal state. I keep it separate from &lt;code&gt;state&lt;/code&gt; to ensure that &lt;code&gt;state&lt;/code&gt; can be immutably handled by both React and immer without complications. This is &#39;passed&#39; into the reducer via a closure. The reducer and initial game state are created early and added to the view with the following line of code:&lt;/p&gt;
+&lt;pre class=&quot;language-typescript&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;game&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; dispatch&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useReducer&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;reducer&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; initialGame&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is parallel to &lt;code&gt;[state, setState] = useState(initialState)&lt;/code&gt; State properties can be accessed through &lt;code&gt;game.current&lt;/code&gt; for rendering. The view does not directly modify the state, which makes handling events very simple:&lt;/p&gt;
+&lt;pre class=&quot;language-typescript&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;button onClick&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;dispatch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; type&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; sb&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;turnStage&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;playerTurn &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+  Start Game
+&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;button&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;dispatch&lt;/code&gt; calls the &lt;em&gt;reducer&lt;/em&gt;, captures the new game state, and triggers a redraw. The &lt;em&gt;reducer&lt;/em&gt; takes care of round and game management. The &lt;em&gt;state&lt;/em&gt; methods take care of game mechanics. Some of the advantages include:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;MVC organization.&lt;/li&gt;
+&lt;li&gt;Game management, game mechanics, and display logic can be tested independently.&lt;/li&gt;
+&lt;li&gt;Direct access to state properties for testing.&lt;/li&gt;
+&lt;li&gt;Game management and game mechanics are not dependent on any UI framework.&lt;/li&gt;
+&lt;li&gt;Interdependent states can be managed together, without worrying about the rendering cycle.&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+  </entry>
   <entry>
     <title>16 August 2025: Reviewing JS Functions</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-08-15-js-functions-review/" />
@@ -422,84 +524,6 @@ bare-bones circuit or &amp;quot;patch&amp;quot; includes:&lt;/p&gt;
 &lt;p&gt;Modular synthesis gets interesting when you chain the output of one module to
 the control to another. This can create interesting feedback loops and
 unpredictable behavior.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>1 June 2025: DIY, Double-Entry Accounting, and Shameless Green</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-06-01-double-entry-accounting-experiments/" />
-    <updated>2025-06-01T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-06-01-double-entry-accounting-experiments/</id>
-    <content type="html">&lt;p&gt;Lately I discovered a conflict between how my bank reports pending transactions
-and how You Need a Budget (YNAB) records them. YNAB is a household budgeting app
-that provides an estimate of available cash after expected expenses. However
-those estimates can go off when pending transactions are changed, deleted, or
-replaced. This is often the case with delivery services and tips.&lt;/p&gt;
-&lt;p&gt;When I&#39;m chewing on a difficult topic I like to model parts of it in code. The
-point of many of my DIY projects isn&#39;t to create a viable product or customize
-software to my needs but to explore practical aspects of a problem using data
-that&#39;s of interest to me. Also I get practice in understanding edge cases for a
-problem.&lt;/p&gt;
-&lt;h3 id=&quot;problem&quot;&gt;Problem&lt;/h3&gt;
-&lt;p&gt;Statements from my bank record each transaction, a sample of transactions look
-like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;05/01/2025  Deposit     $1,000
-05/01/2025  Groceries   $-100
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Double-entry accounting uses a minimum of two records for each transaction. A
-transaction is recorded as a credit on one &amp;quot;account&amp;quot; and a debit on another
-account. This provides a clearer picture of where money comes from and where it
-goes.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Date        Account     Credit  Debit
-2025-05-01  Income      1000
-2025-05-01  Checking            1000
-2025-05-01  Groceries           100
-2025-05-01  Checking    100
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;shameless-green&quot;&gt;Shameless Green&lt;/h3&gt;
-&lt;p&gt;I&#39;ve been working on practicing the shameless green programming model (as
-described by &lt;a href=&quot;https://sandimetz.com/99bottles&quot;&gt;Sandi Metz&lt;/a&gt;). Shameless green is
-a test-driven development method that priorities creating the simplest code
-possible to pass unit tests. Style issues like Don&#39;t Repeat Yourself (DRY) are
-left for later revision and refactoring.&lt;/p&gt;
-&lt;p&gt;A lot of this is very basic, but it&#39;s a new language for me.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Hello World&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Test that the project layout and testing setup works&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Importing CVS&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Load full file&lt;/li&gt;
-&lt;li&gt;Skip metadata lines&lt;/li&gt;
-&lt;li&gt;Process header line&lt;/li&gt;
-&lt;li&gt;Tweak starting balance line&lt;/li&gt;
-&lt;li&gt;Convert to CSV::Row objects&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Processing lines&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Parse date string to date object&lt;/li&gt;
-&lt;li&gt;Remove commas from number strings&lt;/li&gt;
-&lt;li&gt;Convert numbers to floats&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Building double-entry transactions: gnucash and
-&lt;a href=&quot;https://hledger.org/start.html&quot;&gt;ledger&lt;/a&gt; use a model with &lt;em&gt;transactions&lt;/em&gt; with
-two or more &lt;em&gt;splits&lt;/em&gt;.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Match CSV columns to object fields&lt;/li&gt;
-&lt;li&gt;Check integrity: credits = debits&lt;/li&gt;
-&lt;li&gt;Missing field check&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;steps-forward&quot;&gt;Steps Forward&lt;/h3&gt;
-&lt;p&gt;This is a learning project to explore double-entry accounting. For day-to-day tracking, existing software does the job. If I come back to this, the next step would be expanding the import system to automatically classify transactions, and implementing basic income and balance statements.&lt;/p&gt;
 </content>
   </entry>
 </feed>
