@@ -36,6 +36,8 @@
 &lt;li&gt;using NixOS for a while to get a feel for how to manage it&lt;/li&gt;
 &lt;li&gt;separating agnostic command-line utils from linux-specific to possibly use nix on other systems&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h1 id=&quot;kagi&quot;&gt;Kagi&lt;/h1&gt;
+&lt;p&gt;Also experimenting with &lt;a href=&quot;https://kagi.com/&quot;&gt;Kagi search&lt;/a&gt;. Never been comfortable with google&#39;s privacy models, their results just keep getting worse, and I like the ability to downrank less-reliable sites and sources that inexplicably get the top results elesewhere.&lt;/p&gt;
 </content>
   </entry>
   <entry>
