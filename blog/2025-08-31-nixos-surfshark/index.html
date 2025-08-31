@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Fedora Silverblue</title>
+		<title>31 August 2025: Surfshark and NixOS</title>
 		<meta name="description" content="A personal learn-in-public blog, mostly about programming.">
 		<link rel="alternate" href="/kaesluder-blog/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
 		
@@ -528,76 +528,36 @@ pre[class*="language-diff-"] {
 
 
 
-<h1 id="fedora-silverblue">Fedora Silverblue</h1>
+<h1 id="31-august-2025-surfshark-and-nixos">31 August 2025: Surfshark and NixOS</h1>
 
 <ul class="post-metadata">
-	<li><time datetime="2024-11-16">16 November 2024</time></li>
+	<li><time datetime="2025-08-31">31 August 2025</time></li>
 	<li><a href="/kaesluder-blog/tags/linux/" class="post-tag">linux</a></li>
 </ul>
 
-<p>I like to try out different linux distributions.
-Part of it is testing how how different groups implement some of the same ideas,
-but part is due to inevitably finding rough edges as an install ages over time.
-At the same time, there are parts of a linux install that I find annoying.
-The big ones are hardware compatibility and desktop environments.
-To be fair, I've never had a clean setup on MSWindows either.</p>
-<p>My latest go at this is <a href="https://fedoraproject.org/atomic-desktops/silverblue/">Fedora Silverblue</a>.
-Silverblue is one of Fedora's atomic operating system variants.
-Atomic here means that base operating system updates happen as one reversible chunk
-rather than file-by-file which is typical.
-The base system and utilities are declared immutable,
-at least for binaries.
-Some configuration files can be changed as normal.</p>
-<p>How are you supposed to install software?
-For applications that run in the shell,
-the preferred method is to run OCI (Docker) containers
-with personalized or specialized installs.
-Silverblue ships with <code>toolbox</code> a utility to
-download and install selected images
-that are configured to work with the host operating system
-including Wayland and port forwarding.</p>
-<p><code>toolbox</code> is compatible with <a href="https://distrobox.it/#distrobox">Distrobox</a>,
-which provides more features and support for additional linux distributions.
-Currently I have arch, bazzite-arch, and alpine ready to run.
-<a href="https://github.com/ublue-os/bazzite-arch">bazzite-arch</a> is an interesting example of a special-purpose image.
-It comes with multiple apps for linux gaming pre-installed.
-Distrobox also has the ability to assign different home folders to containers.
-By default they all use the same home folder, which makes accessing files convenient.</p>
-<p><img src="content/images/distrobox_list.png" alt="List of distrobox images including arch, bazzite-arch, and alpine"></p>
-<p>Forwarding of graphical windows from a container to the Siverblue host works well.
-Distrobox also has a utility to export desktop menu information
-so I can launch apps directly from the Gnome desktop. (How do games play?
-I've had mixed results but I don't have a gaming laptop
-and have not done a lot of testing here.)
-There are some minor glitches but few consistent problems.</p>
-<p><img src="content/images/lutris_screenshot.png" alt="My election survival toolkit on Lutris"></p>
-<p><em>Lutris running from bazzite-arch container</em></p>
-<p><img src="content/images/xeyes_screenshot.png" alt="Biblically Accurate Xeyes"></p>
-<p><em>Biblically Accurate Xeyes</em></p>
-<p>The switch also included jumping into Gnome for the first time in several years.
-Mostly I've been sticking with KDE but have been wanting a change focused on minimizing distractions.
-Gnome does well with the everything full-screen style I prefer,
-without the radical changes imposed by tiling WMs.
-Flatpak is the preferred method for installing graphical software,
-including firefox, chrome, media players, and terminal emulators.</p>
-<p>The base operating system can be changed using <code>rpm-ostree</code>,
-<a href="https://coreos.github.io/rpm-ostree/">another image-based package system</a>.
-This raises another complication if you're going beyond Flatpak.
-My laptop now has two container systems, three container managers,
-and separate package managers and collections for each container.
-I don't mind, but it could be confusing to have too many other systems running as clients.</p>
-<p>There are related projects supporting different WMs and Desktop environments:</p>
-<ul>
-<li><a href="https://fedoraproject.org/atomic-desktops/">Fedora Atomic Desktops</a></li>
-<li><a href="https://aeondesktop.github.io/">OpenSUSE Aeon</a></li>
-<li><a href="https://universal-blue.org/">universal blue images</a> (Fedora Atomic with additional customization)</li>
-</ul>
-<p>Overall it's been an easy and comfortable experience so far.
-There are a few glitches here and there,
-primarily due to flatpak permissions,
-but overall it provides a solid base for experimentation.</p>
+<h1 id="nixos-and-surfshark">NixOS and Surfshark</h1>
+<p>With all the anti-trans news of this week I'm working on bringing up some better internet security, including a vpn subscription to Surfshark. Simultaneously, I'm distro-hopping again looking for a few improvements on some minor issues that individually are not a big deal, but over the months have become more and more frustrating.</p>
+<p>NixOS is worth a shot. There are some configuration and software things I end up setting up in nearly every new computer. My experience at Amazon has sold me on configuration as code. And my personal laptop (Thinkpad E14 Intel Gen. 1) has some quirks that require some special handling. The NixOS config file reminds me of the Freebsd centralized <a href="https://docs.freebsd.org/en/books/handbook/config/">config files</a>. Nix has its own quirks.</p>
+<p>Honestly the most challenging part so far was setting up Surfshark, which uses its own configuration client distributed as snap or flatpak. The first step was setting up flatpak <a href="https://wiki.nixos.org/wiki/Flatpak">according to wiki instructions</a>.</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix">  services<span class="token punctuation">.</span>flatpak<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  systemd<span class="token punctuation">.</span>services<span class="token punctuation">.</span>flatpak<span class="token operator">-</span>repo <span class="token operator">=</span> <span class="token punctuation">{</span>
+    wantedBy <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">"multi-user.target"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    path <span class="token operator">=</span> <span class="token punctuation">[</span> pkgs<span class="token punctuation">.</span>flatpak <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    script <span class="token operator">=</span> <span class="token string">''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    ''</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>A trickier problem to fix was DNS resolution failures when Surfshark is active. A solution was to disable <code>resolv.conf</code> in favor of NetworkManager DNS settings. These settings configure the system to use the Surfshark DNS servers set through NetworkManager rather than attempt to use resolv.conf.</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix">  services<span class="token punctuation">.</span>resolved<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  networking<span class="token punctuation">.</span>resolvconf<span class="token punctuation">.</span>enable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  networking<span class="token punctuation">.</span>networkmanager<span class="token punctuation">.</span>dns <span class="token operator">=</span> <span class="token string">"systemd-resolved"</span><span class="token punctuation">;</span></code></pre>
+<p>Future work:</p>
+<ol>
+<li>using NixOS for a while to get a feel for how to manage it</li>
+<li>separating agnostic command-line utils from linux-specific to possibly use nix on other systems</li>
+</ol>
 
-<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2024-07-catchup-and-editing-oneliners/">July 2024, Catchup and Quick Ideas</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder-blog/blog/2025-03-18-i18n-vitest-mocks/">i18n mocks with vitest</a></li>
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-08-23-react-reducer-pattern/">23 August 2025: React Reducer Pattern</a></li>
 </ul>
 
 			</heading-anchors>
@@ -609,7 +569,7 @@ but overall it provides a solid base for experimentation.</p>
 			</p>
 		</footer>
 
-		<!-- This page `/blog/2024-11-09-silverblue/` was built on 2025-08-31T14:45:37.285Z -->
+		<!-- This page `/blog/2025-08-31-nixos-surfshark/` was built on 2025-08-31T14:45:37.286Z -->
 		<script type="module" src="/kaesluder-blog/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>

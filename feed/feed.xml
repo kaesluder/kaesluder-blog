@@ -5,11 +5,39 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-08-23T00:00:00Z</updated>
+  <updated>2025-08-31T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
+  <entry>
+    <title>31 August 2025: Surfshark and NixOS</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-08-31-nixos-surfshark/" />
+    <updated>2025-08-31T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-08-31-nixos-surfshark/</id>
+    <content type="html">&lt;h1 id=&quot;nixos-and-surfshark&quot;&gt;NixOS and Surfshark&lt;/h1&gt;
+&lt;p&gt;With all the anti-trans news of this week I&#39;m working on bringing up some better internet security, including a vpn subscription to Surfshark. Simultaneously, I&#39;m distro-hopping again looking for a few improvements on some minor issues that individually are not a big deal, but over the months have become more and more frustrating.&lt;/p&gt;
+&lt;p&gt;NixOS is worth a shot. There are some configuration and software things I end up setting up in nearly every new computer. My experience at Amazon has sold me on configuration as code. And my personal laptop (Thinkpad E14 Intel Gen. 1) has some quirks that require some special handling. The NixOS config file reminds me of the Freebsd centralized &lt;a href=&quot;https://docs.freebsd.org/en/books/handbook/config/&quot;&gt;config files&lt;/a&gt;. Nix has its own quirks.&lt;/p&gt;
+&lt;p&gt;Honestly the most challenging part so far was setting up Surfshark, which uses its own configuration client distributed as snap or flatpak. The first step was setting up flatpak &lt;a href=&quot;https://wiki.nixos.org/wiki/Flatpak&quot;&gt;according to wiki instructions&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  services&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flatpak&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  systemd&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;services&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flatpak&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;repo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    wantedBy &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;multi-user.target&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    path &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flatpak &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    script &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;&#39;
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    &#39;&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A trickier problem to fix was DNS resolution failures when Surfshark is active. A solution was to disable &lt;code&gt;resolv.conf&lt;/code&gt; in favor of NetworkManager DNS settings. These settings configure the system to use the Surfshark DNS servers set through NetworkManager rather than attempt to use resolv.conf.&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  services&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;resolved&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  networking&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;resolvconf&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;enable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  networking&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;networkmanager&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;dns &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;systemd-resolved&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Future work:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;using NixOS for a while to get a feel for how to manage it&lt;/li&gt;
+&lt;li&gt;separating agnostic command-line utils from linux-specific to possibly use nix on other systems&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+  </entry>
   <entry>
     <title>23 August 2025: React Reducer Pattern</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-08-23-react-reducer-pattern/" />
@@ -485,45 +513,6 @@ with_fx &lt;span class=&quot;token symbol&quot;&gt;:ring_mod&lt;/span&gt;&lt;spa
 &lt;li&gt;&lt;a href=&quot;https://alisepehri.medium.com/how-to-create-database-views-in-ruby-on-rails-537f1a981e3d&quot;&gt;How to create Database Views in Ruby on Rails?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.usebruno.com/&quot;&gt;Bruno&lt;/a&gt; - new postman substitute that uses github for synchronizing collections&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>7 June 2025: Link Post</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-06-07-link-post-2025-07/" />
-    <updated>2025-06-07T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-06-07-link-post-2025-07/</id>
-    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/6QX57aIDbDU?si=f9Hhlke_TUSOIMGe&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;Most of this week has been applying bugfixes, interface refining, and unit test
-techniques discussed earlier.&lt;/p&gt;
-&lt;h2 id=&quot;neurodivergence&quot;&gt;Neurodivergence&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://thedailytism.com/&quot;&gt;The Daily Tism&lt;/a&gt;, autistic comedy blog.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.kcl.ac.uk/news/gaps-in-adhd-research-hindering-policy&quot;&gt;King&#39;s College London&lt;/a&gt;,
-no significant rise in the prevalence of ADHD, but research is flawed.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.verywellmind.com/what-to-know-about-autism-and-justice-sensitivity-8631234&quot;&gt;verywellmind&lt;/a&gt;,
-article on justice sensitivity in ADHD and Autistic people.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;digital-music&quot;&gt;Digital Music&lt;/h2&gt;
-&lt;p&gt;Digital music has been an on-and-off interest. Spent part of this week playing
-with &lt;a href=&quot;https://www.bespokesynth.com/&quot;&gt;Bespoke&lt;/a&gt; a cross-platform modular software
-synth.&lt;/p&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/N_OeDNIkUR4?si=EXzvZFw6NhxB-66L&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;Introduction video:&lt;/p&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JI7bukrObxU?si=d2DZ36xBDdjzH08v&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;Modular synthesis breaks the process of sound creation into separate modules. A
-bare-bones circuit or &amp;quot;patch&amp;quot; includes:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;An instrument, sequencer, or controller that creates pitch data.&lt;/li&gt;
-&lt;li&gt;An oscillator that creates noise.&lt;/li&gt;
-&lt;li&gt;An envelope module that determines the volume of each note over time.&lt;/li&gt;
-&lt;li&gt;An amplifier that determines the overall volume for multiple notes.&lt;/li&gt;
-&lt;li&gt;Optional filters and affect to change the quality of the sound.&lt;/li&gt;
-&lt;li&gt;An output device (typically speakers).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Modular synthesis gets interesting when you chain the output of one module to
-the control to another. This can create interesting feedback loops and
-unpredictable behavior.&lt;/p&gt;
 </content>
   </entry>
 </feed>
