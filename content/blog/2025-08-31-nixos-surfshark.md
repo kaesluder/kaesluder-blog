@@ -39,3 +39,7 @@ Future work:
 
 1. using NixOS for a while to get a feel for how to manage it
 2. separating agnostic command-line utils from linux-specific to possibly use nix on other systems
+
+# Kagi
+
+Also experimenting with [Kagi search](https://kagi.com/). Never been comfortable with google's privacy models, their results just keep getting worse, and I like the ability to downrank less-reliable sites and sources that inexplicably get the top results elesewhere.
