@@ -1,3 +1,4 @@
+.astro/
 _site/
 node_modules/
 .cache

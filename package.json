@@ -6,13 +6,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview",
-		"eleventy:dev": "npx @11ty/eleventy --serve --quiet",
-		"eleventy:build": "npx @11ty/eleventy",
-		"eleventy:build-ghpages": "npx @11ty/eleventy --pathprefix=/kaesluder-blog/",
-		"eleventy:debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
-		"eleventy:debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-		"eleventy:benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+		"preview": "astro preview"
 	},
 	"repository": {
 		"type": "git",
@@ -36,19 +30,12 @@
 	},
 	"homepage": "https://github.com/11ty/eleventy-base-blog#readme",
 	"devDependencies": {
-		"@11ty/eleventy": "^3.1.2",
-		"@11ty/eleventy-img": "^6.0.4",
-		"@11ty/eleventy-navigation": "^1.0.4",
-		"@11ty/eleventy-plugin-rss": "^2.0.4",
-		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
-		"@tailwindcss/postcss": "^4.1.13",
 		"astro": "~5.13.5",
 		"cross-env": "^7.0.3",
 		"cssnano": "^7.1.1",
 		"luxon": "^3.6.1",
-		"postcss": "^8.5.6",
 		"prismjs": "^1.30.0",
-		"tailwindcss": "^4.1.13",
+		"tailwindcss": "4.1.10",
 		"typescript": "^5.7.2",
 		"zod": "^3.25.67",
 		"zod-validation-error": "^3.5.2"
@@ -57,7 +44,7 @@
 		"@astrojs/db": "^0.17.1",
 		"@astrojs/mdx": "^4.3.4",
 		"@astrojs/react": "^4.3.0",
-		"@tailwindcss/vite": "^4.1.13",
+		"@tailwindcss/vite": "4.1.10",
 		"@types/react": "^19.1.12",
 		"@types/react-dom": "^19.1.9",
 		"@zachleat/heading-anchors": "^1.0.3",
@@ -66,5 +53,10 @@
 		"markdown-it-mermaid": "^0.2.0",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1"
+	},
+	"overrides": {
+		"@tailwindcss/vite": {
+			"vite": "6.3.5"
+		}
 	}
 }
