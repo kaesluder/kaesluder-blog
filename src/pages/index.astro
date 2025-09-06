@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get all blog posts and sort by date (newest first)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts
+  .filter(post => !post.data.draft) // Filter out drafts
+  .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
+---
+
+<BaseLayout 
+  title="Home"
+  description="A personal learn-in-public blog, mostly about programming."
+>
+  <h1>Welcome to Kae's Blog</h1>
+  <p>A personal learn-in-public blog, mostly about programming.</p>
+
+  <h2>Recent Posts</h2>
+  <ul>
+    {sortedPosts.map(post => (
+      <li>
+        <h3>
+          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+        </h3>
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString()}
+        </time>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div>
+            {post.data.tags.map(tag => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

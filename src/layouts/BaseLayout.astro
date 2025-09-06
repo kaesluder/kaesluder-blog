@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  mermaid?: boolean;
+}
+
+const { title, description, mermaid = false } = Astro.props;
+
+// Site metadata (eventually from config)
+const siteData = {
+  title: "Kae Job Sluder",
+  url: "http://localhost:4321/", // Local development URL
+  language: "en",
+  description: "A personal learn-in-public blog, mostly about programming.",
+  author: {
+    name: "Kae Job Sluder",
+    url: "https://kaesluder.github.io/",
+  },
+};
+
+const navList = [
+  { title: "Home", url: "/" },
+  { title: "Blog", url: "/blog/" },
+  { title: "About", url: "/about/" },
+];
+
+const pageTitle = title ? `${title} | ${siteData.title}` : siteData.title;
+const pageDescription = description || siteData.description;
+---
+
+<!doctype html>
+<html lang={siteData.language}>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription}>
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title={siteData.title}>
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/400e27f1db.js" crossorigin="anonymous"></script>
+  </head>
+  <body class="bg-white text-gray-900 font-sans">
+    <a href="#main" id="skip-link" >Skip to main content</a>
+
+    <header>
+      <a href="/" class="home-link">{siteData.title}</a>
+
+      <nav>
+        <h2 class="visually-hidden">Top level navigation menu</h2>
+        <ul class="nav">
+          {navList.map(entry => (
+            <li class="nav-item">
+              <a
+                href={entry.url}
+                aria-current={Astro.url.pathname === entry.url ? "page" : undefined}
+              >
+                {entry.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer>
+      <p>
+        <em>Built with <a href="https://astro.build/">Astro</a></em>
+      </p>
+    </footer>
+
+    {mermaid && (
+      <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      </script>
+    )}
+  </body>
+</html>
