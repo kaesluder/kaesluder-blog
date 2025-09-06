@@ -38,6 +38,7 @@
             pkgs.nodePackages.typescript
             pkgs.nodePackages.typescript-language-server
             pkgs.nodePackages.prettier
+            pkgs.astro-language-server
 
             # Python is required on NixOS if the dependencies require node-gyp
 
