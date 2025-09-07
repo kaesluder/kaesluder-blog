@@ -5,11 +5,87 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-08-31T00:00:00Z</updated>
+  <updated>2025-09-06T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
+  <entry>
+    <title>2025-09-06: More Nix with home manager</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-09-06-nixos-home-manager/" />
+    <updated>2025-09-06T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-09-06-nixos-home-manager/</id>
+    <content type="html">&lt;h2 id=&quot;nixos-after-a-week&quot;&gt;Nixos after a week&lt;/h2&gt;
+&lt;p&gt;So far so good. Been running a week and not experienced the issue I was having with wake from sleep. I didn&#39;t expect Nixos to become a daily driver, but it is for now.&lt;/p&gt;
+&lt;h2 id=&quot;home-manager&quot;&gt;Home-manager&lt;/h2&gt;
+&lt;p&gt;One of my goals is to have a consistent set of software and utilities I can easily manage across multiple linux and Macos systems. These include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;helix and/or nvim: primary editors&lt;/li&gt;
+&lt;li&gt;fd and rg: &amp;quot;easier&amp;quot; replacements for find and grep&lt;/li&gt;
+&lt;li&gt;yazi, zellij, zoxide, chezmoi: shell helper utilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nix is very good at declaring software installs. And home manager built on nix seems like a good solution for keeping that list in my user-space.&lt;/p&gt;
+&lt;h3 id=&quot;problem-1-global-or-standalone&quot;&gt;Problem 1: Global or Standalone?&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;https://nix-community.github.io/home-manager/&quot;&gt;home-manager manual&lt;/a&gt; has instructions for installing home-manager in stand-alone mode and as an extension of the global &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt; file. I found out the hard way I can&#39;t do both (documentation is inconsistent and a bit frustrating.) Standalone seems to be more portable. Integration with &lt;code&gt;configuration.nix&lt;/code&gt; might be useful if you want to configure everything in one file.&lt;/p&gt;
+&lt;p&gt;The one change I made at the OS level was to add home-manager to &lt;code&gt;environment.systemPackages&lt;/code&gt; in &lt;code&gt;/etc/nixos/configuration.nix/&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;problem-2-portability&quot;&gt;Problem 2: Portability?&lt;/h3&gt;
+&lt;p&gt;The recommend determinate MacOS installer uses the &amp;quot;experimental&amp;quot; feature flakes, which pushes me into flakes on Nixos as well. It took me a long time and a lot of fiddling to figure out how to use a flake as part of my home profile. I credit &lt;a href=&quot;https://zero-to-nix.com/&quot;&gt;Zero to Nix&lt;/a&gt; for somewhat figuring out how flakes work, and &lt;a href=&quot;https://jade.fyi/blog/flakes-arent-real/&quot;&gt;Flakes aren&#39;t real and cannot hurt you: a guide to using Nix flakes the non-flake way&lt;/a&gt; for figuring out some perspective.&lt;/p&gt;
+&lt;p&gt;If you have flakes enabled as a feature, home-manager creates two boilerplate files, &lt;code&gt;home.nix&lt;/code&gt; and &lt;code&gt;flake.nix&lt;/code&gt;. However neither of these are exactly portable &lt;code&gt;home.nix&lt;/code&gt; includes references to my username and home directory:&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  home&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;username &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;kaes&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  home&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;homeDirectory &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;/home/kaes&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While flake.nix specifies a system architecture.&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;	system &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Why not use environment variables? Nix with flakes considers environment variable, &amp;quot;impure&amp;quot;, one of those pure-functional language choices that I understand but find annoying.&lt;/p&gt;
+&lt;p&gt;So far the hack I&#39;m using is to add third file that only includes the list of packages I want installed. My &lt;code&gt;packages.nix&lt;/code&gt; file is careful not to include any platform-specific code:&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  home&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;packages &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;with&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+    btop
+    fish
+    fzf
+    zsh
+    helix
+
+    gh
+    nodejs_24
+    typescript
+    typescript&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;language&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;server
+
+		&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;
+
+    ripgrep
+    fd
+    neovim
+
+  &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is imported into the boilerplate flake.nix as a module:&lt;/p&gt;
+&lt;pre class=&quot;language-nix&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-nix&quot;&gt;  outputs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; home&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;manager&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt;
+      system &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;x86_64-linux&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      pkgs &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nixpkgs&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;legacyPackages&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token antiquotation important&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;system&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      homeConfigurations&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;kaes&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; home&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;manager&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lib&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;homeManagerConfiguration &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;inherit&lt;/span&gt; pkgs&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token comment&quot;&gt;# Specify your home configuration modules here, for example,&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;# the path to your home.nix.&lt;/span&gt;
+        modules &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;token url&quot;&gt;./home.nix&lt;/span&gt;
+          &lt;span class=&quot;token url&quot;&gt;./packages.nix&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token comment&quot;&gt;# Optionally use extraSpecialArgs&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;# to pass through arguments to home.nix&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ideally I want to either auto-detect the system and username or modularize that as a minimal local config. But I&#39;m still a beginner at this.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>31 August 2025: Surfshark and NixOS</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-08-31-nixos-surfshark/" />
@@ -427,93 +503,6 @@ flowchart TD
 &lt;li&gt;Started a playthrough of &lt;a href=&quot;https://altersthegame.com/&quot;&gt;The Alters&lt;/a&gt;. This is similar to the 1996 movie &lt;a href=&quot;https://www.imdb.com/title/tt0117108/&quot;&gt;Multiplicity&lt;/a&gt; where a stressed-out husband clones himself multiple times. &lt;em&gt;The Alters&lt;/em&gt; is a base-building survival game centered around Jan, a construction expert. Fortunately, he has weird science to clone himself multiple times, giving each clone fake memories of the training and skills he lacks. Unfortunately, each clone has survived a different set of challenges and traumas. As is frequently the case in survival scifi, your biggest challenge is yourself.&lt;/li&gt;
 &lt;li&gt;Backed &lt;a href=&quot;https://www.kickstarter.com/projects/hecticelectron/defy-the-gods-rpg&quot;&gt;Defy the Gods&lt;/a&gt;, a mesopotamian-themed TTRPG.&lt;/li&gt;
 &lt;li&gt;Picked up &lt;a href=&quot;https://modiphius.net/en-us/pages/homeworld&quot;&gt;Homeworld: Revelations&lt;/a&gt;, because I&#39;ve never been quite able to get the CRPG to run.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>14 June 2025: Cut-Ups, Simplified Krell Patch</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-06-14-cut-ups-krell/" />
-    <updated>2025-06-14T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-06-14-cut-ups-krell/</id>
-    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UrfFHzqGBZI?si=fEakddz0v1WR7Epk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;h2 id=&quot;cut-ups-and-solo-ttrpg-play&quot;&gt;Cut-Ups and Solo TTRPG Play&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/robwieland/2023/11/25/now-is-a-great-time-to-check-out-solo-roleplaying/&quot;&gt;Solo Roleplaying&lt;/a&gt; combines elements of traditional tabletop RPGs like &lt;em&gt;Dungeons and Dragons,&lt;/em&gt; creative journaling, and the use of divination oracles as a means for brainstroming and reflection. The games use oracles such as random dice tables, tarot, or playing cards to create an element of challenge and surpise usually provided by gamemasters or (in the case of computer-rpgs) game-design teams.&lt;/p&gt;
-&lt;p&gt;Lately I&#39;ve been experimenting with &lt;a href=&quot;https://en.wikipedia.org/wiki/Cut-up_technique&quot;&gt;cut-up techniques&lt;/a&gt; as a way to drive scenes and plot developments. a more direct TTRPG implementation is included in the &lt;a href=&quot;https://www.drivethrurpg.com/en/product/319632/tilt-an-oracle-for-solo-roleplaying&quot;&gt;Tilt: An oracle for solo roleplaying&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Primarily I&#39;ve been using song lyrics because poetry offers a high level of imagery per word. The process I use involves the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Collection&lt;/li&gt;
-&lt;li&gt;Curation&lt;/li&gt;
-&lt;li&gt;Random Draws&lt;/li&gt;
-&lt;li&gt;Editing&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Collection: Pulling text from sources that match the overall theme of the current game. In the example below, I started with music that felt personally and/or politically apocalyptic (even if the song isn&#39;t necessarily science fiction themed). After a few trials, I added in some additional texts to fill in some missing pieces (in this case, &amp;quot;Building Steam with a Grain of Salt,&amp;quot; &amp;quot;Not,&amp;quot; and &amp;quot;Many Moons&amp;quot;). These get copied into a markdown file with source citations at the top and lyrics below.&lt;/p&gt;
-&lt;pre class=&quot;language-markdown&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;#&lt;/span&gt; music for scifi game&lt;/span&gt;
-
-&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;##&lt;/span&gt; Sources&lt;/span&gt;
-
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; St. Vincent, &quot;Los Ageless&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Beast in Black, &quot;Moonlight Rendezvous&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Reliqa, &quot;E.O.D.&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Reliqa, &quot;Cold World&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Frozen Crown, &quot;I am the Tyrant&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Rolling Stones, &quot;Paint it Black&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; DJ Shadow, &quot;Building Steam with a Grain of Salt&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Patti Smith (orig Springsteen), &quot;Because the Night&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Leonard Cohen, &quot;You Want it Darker&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Big Thief, &quot;Not&quot;
-&lt;span class=&quot;token list punctuation&quot;&gt;-&lt;/span&gt; Janelle Monae, &quot;Many Moons&quot;
-
-&lt;span class=&quot;token title important&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;##&lt;/span&gt; Text&lt;/span&gt;
-
-In Los Ageless,
-the winter never comes
-the mothers milk their young
-But I can keep running
-...&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Curation: I edit down the original text to get rid of repeated lines. I also break up lines to get a single idea per line,&lt;/p&gt;
-&lt;p&gt;Random Draws: I use the simple unix command line &lt;code&gt;tail -n +18 music_scifi.md | shuf | head -n 15&lt;/code&gt;. (Remove the first 18 lines (sources), shuffle all the lines, take the first 15 lines.)&lt;/p&gt;
-&lt;p&gt;Editing: Further edit the result to fit the situation and grammar. For example, a response to &amp;quot;What really motivates the antagonist?&amp;quot;:&lt;/p&gt;
-&lt;pre class=&quot;language-markdown&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-markdown&quot;&gt;Is there a lullaby for suffering? (&quot;You Want it Darker&quot;)
-Come on now, try to understand (&quot;Because the Night&quot;)
-My doubts make me alone (&quot;Because the Night&quot;)
-Not your stable words (&quot;Not&quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Through the process of sifting and editing, a previously flat antagonist now has depth, a motivation, and a possible weakness.&lt;/p&gt;
-&lt;h2 id=&quot;sonic-pi-a-krell-ish-experiment&quot;&gt;Sonic Pi: A Krell-ish Experiment&lt;/h2&gt;
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/oNKhju6Pryg?si=SrIF1OpmEpfHI2fk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;p&gt;Bebe and Louis Barron&#39;s soundtrack work for &lt;em&gt;Forbidden Planet&lt;/em&gt; is considered to be one of the first examples of generative electronic music in cinema. It&#39;s also a project that&#39;s often imitated because it includes pitch, envelope, and filter randomization. Here&#39;s a simplified attempt at a &amp;quot;krell patch&amp;quot; implemented in sonic pi:&lt;/p&gt;
-&lt;pre class=&quot;language-ruby&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-ruby&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Welcome to Sonic Pi&lt;/span&gt;
-
-define &lt;span class=&quot;token symbol&quot;&gt;:three_d_6&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
-  result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;token number&quot;&gt;3.&lt;/span&gt;times &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
-    result &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; dice &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
-  puts result
-  result
-&lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
-
-time_scale &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.25&lt;/span&gt;
-note_slide &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
-ring_mod_freq &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;60&lt;/span&gt;
-
-with_fx &lt;span class=&quot;token symbol&quot;&gt;:ring_mod&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;mix&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;freq&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ring_mod_freq &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;token number&quot;&gt;3.&lt;/span&gt;times &lt;span class=&quot;token keyword&quot;&gt;do&lt;/span&gt;
-    attack &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; three_d_6 &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; time_scale
-    release &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; three_d_6 &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; time_scale
-    note &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;70&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; rrand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
-    use_synth &lt;span class=&quot;token symbol&quot;&gt;:fm&lt;/span&gt;
-    play note&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;attack&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; attack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; release&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;note_slide&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; note_slide
-    use_synth &lt;span class=&quot;token symbol&quot;&gt;:chipbass&lt;/span&gt;
-    play note &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; rrand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;attack&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; attack&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; release&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token symbol&quot;&gt;note_slide&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; note_slide
-    sleep attack &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; release &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
-  &lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;token keyword&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;work-research&quot;&gt;Work Research&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/scenic-views/scenic&quot;&gt;senic gem&lt;/a&gt; - Ruby gem for for managing postgres views.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://medium.com/@snapsheetclaims/our-journey-exploring-the-magic-of-views-in-rails-applications-28e5b3797254&quot;&gt;Our Journey: Exploring the Magic of Views in Rails Applications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://alisepehri.medium.com/how-to-create-database-views-in-ruby-on-rails-537f1a981e3d&quot;&gt;How to create Database Views in Ruby on Rails?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.usebruno.com/&quot;&gt;Bruno&lt;/a&gt; - new postman substitute that uses github for synchronizing collections&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>13 July 2025: Vitest Mocking</title>
+		<title>2025-09-06: More Nix with home manager</title>
 		<meta name="description" content="A personal learn-in-public blog, mostly about programming.">
 		<link rel="alternate" href="/kaesluder-blog/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
 		
@@ -528,65 +528,84 @@ pre[class*="language-diff-"] {
 
 
 
-<h1 id="13-july-2025-vitest-mocking">13 July 2025: Vitest Mocking</h1>
+<h1 id="2025-09-06-more-nix-with-home-manager">2025-09-06: More Nix with home manager</h1>
 
 <ul class="post-metadata">
-	<li><time datetime="2025-07-13">13 July 2025</time></li>
-	<li><a href="/kaesluder-blog/tags/javascript/" class="post-tag">javascript</a></li>
+	<li><time datetime="2025-09-06">06 September 2025</time></li>
+	<li><a href="/kaesluder-blog/tags/linux/" class="post-tag">linux</a></li>
 </ul>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZKCGilFFFPk?si=KzYO6xsQ8G_Uemka" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
-<p>Some notes on vitest after working out a few things. Needed to look beyond the cookbook examples to why vitest and jest mocks work.</p>
-<h3 id="modules-are-objects">Modules are objects</h3>
-<p>Modules can be structured as objects with method variables. A simple module with one function (not complete):</p>
-<pre class="language-ts" tabindex="0"><code class="language-ts"><span class="token comment">// /src/mosaicUtils.ts</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> mosaicFetch <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"/mosaic/index.json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> imageList<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">await</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> imageList<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>Can be mocked as:</p>
-<pre class="language-ts" tabindex="0"><code class="language-ts"><span class="token comment">// App.test.ts</span>
-<span class="token keyword">const</span> exampleData <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token string">"15th_century_egyptian_anatomy_of_horse.jpg"</span><span class="token punctuation">,</span>
-  <span class="token string">"163_of_'Five_Years_in_Siam_from_1891_to_1896_..._With_maps_and_illustrations_by_the_author'_(11249062174).jpg"</span><span class="token punctuation">,</span>
-  <span class="token string">"640px-Avon_Fantasy_Reader_8.jpg"</span><span class="token punctuation">,</span>
-  <span class="token operator">...</span>
-<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<h2 id="nixos-after-a-week">Nixos after a week</h2>
+<p>So far so good. Been running a week and not experienced the issue I was having with wake from sleep. I didn't expect Nixos to become a daily driver, but it is for now.</p>
+<h2 id="home-manager">Home-manager</h2>
+<p>One of my goals is to have a consistent set of software and utilities I can easily manage across multiple linux and Macos systems. These include:</p>
+<ul>
+<li>helix and/or nvim: primary editors</li>
+<li>fd and rg: &quot;easier&quot; replacements for find and grep</li>
+<li>yazi, zellij, zoxide, chezmoi: shell helper utilities</li>
+</ul>
+<p>Nix is very good at declaring software installs. And home manager built on nix seems like a good solution for keeping that list in my user-space.</p>
+<h3 id="problem-1-global-or-standalone">Problem 1: Global or Standalone?</h3>
+<p>The <a href="https://nix-community.github.io/home-manager/">home-manager manual</a> has instructions for installing home-manager in stand-alone mode and as an extension of the global <code>/etc/nixos/configuration.nix</code> file. I found out the hard way I can't do both (documentation is inconsistent and a bit frustrating.) Standalone seems to be more portable. Integration with <code>configuration.nix</code> might be useful if you want to configure everything in one file.</p>
+<p>The one change I made at the OS level was to add home-manager to <code>environment.systemPackages</code> in <code>/etc/nixos/configuration.nix/</code>.</p>
+<h3 id="problem-2-portability">Problem 2: Portability?</h3>
+<p>The recommend determinate MacOS installer uses the &quot;experimental&quot; feature flakes, which pushes me into flakes on Nixos as well. It took me a long time and a lot of fiddling to figure out how to use a flake as part of my home profile. I credit <a href="https://zero-to-nix.com/">Zero to Nix</a> for somewhat figuring out how flakes work, and <a href="https://jade.fyi/blog/flakes-arent-real/">Flakes aren't real and cannot hurt you: a guide to using Nix flakes the non-flake way</a> for figuring out some perspective.</p>
+<p>If you have flakes enabled as a feature, home-manager creates two boilerplate files, <code>home.nix</code> and <code>flake.nix</code>. However neither of these are exactly portable <code>home.nix</code> includes references to my username and home directory:</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix">  home<span class="token punctuation">.</span>username <span class="token operator">=</span> <span class="token string">"kaes"</span><span class="token punctuation">;</span>
+  home<span class="token punctuation">.</span>homeDirectory <span class="token operator">=</span> <span class="token string">"/home/kaes"</span><span class="token punctuation">;</span></code></pre>
+<p>While flake.nix specifies a system architecture.</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix">	system <span class="token operator">=</span> <span class="token string">"x86_64-linux"</span><span class="token punctuation">;</span></code></pre>
+<p>Why not use environment variables? Nix with flakes considers environment variable, &quot;impure&quot;, one of those pure-functional language choices that I understand but find annoying.</p>
+<p>So far the hack I'm using is to add third file that only includes the list of packages I want installed. My <code>packages.nix</code> file is careful not to include any platform-specific code:</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix"><span class="token punctuation">{</span> pkgs<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span><span class="token punctuation">:</span>
 
-<span class="token comment">// Argument 1: source of the old module</span>
-vi<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span><span class="token string">"../src/mosaicUtils"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-	<span class="token comment">// set up the mock function to return the data</span>
-  <span class="token keyword">const</span> mockMosaicFetch <span class="token operator">=</span> vi<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token operator">=></span> exampleData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+  home<span class="token punctuation">.</span>packages <span class="token operator">=</span> <span class="token keyword">with</span> pkgs<span class="token punctuation">;</span> <span class="token punctuation">[</span>
+    btop
+    fish
+    fzf
+    zsh
+    helix
 
-  <span class="token comment">// return a new module</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    mosaicFetch<span class="token operator">:</span> mockMosaicFetch<span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h2 id="vi-mock-and-vitest-replace-the-old-module"><code>vi.mock()</code> and vitest &quot;replace&quot; the old module</h2>
-<p>The utility library is imported with:</p>
-<pre class="language-ts" tabindex="0"><code class="language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> mosaicFetch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../src/mosaicUtils"</span><span class="token punctuation">;</span></code></pre>
-<p>vitest intercepts this import call and replaces the entire module, not just mosaicFetch.</p>
-<h2 id="mocking-one-or-some-objects-in-a-module">Mocking one or some objects in a module</h2>
-<p><code>vi.mock()</code> replaces the entire module, not just a single function. Use <code>vi.importActual(</code>sourceFile`) to include other objects without modification.</p>
-<pre class="language-ts" tabindex="0"><code class="language-ts"><span class="token comment">// from https://vitest.dev/api/vi.html#vi-importactual</span>
-vi<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span><span class="token string">'./example.js'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> originalModule <span class="token operator">=</span> <span class="token keyword">await</span> vi<span class="token punctuation">.</span><span class="token function">importActual</span><span class="token punctuation">(</span><span class="token string">'./example.js'</span><span class="token punctuation">)</span>
+    gh
+    nodejs_24
+    typescript
+    typescript<span class="token operator">-</span>language<span class="token operator">-</span>server
 
-  <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">...</span>originalModule<span class="token punctuation">,</span> get<span class="token operator">:</span> vi<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre>
-<h2 id="vi-spyon-watches-a-single-method-getter-or-setter"><code>vi.spyOn()</code> watches a <em>single</em> method, getter or setter</h2>
-<p>A spy can be used to watch a single function in a module with optional replacement. See <a href="https://vitest.dev/api/vi.html#vi-spyon">documentation</a>.
-The same mock can be made as:</p>
-<pre class="language-ts" tabindex="0"><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> mosaicUtils <span class="token keyword">from</span> <span class="token string">"../src/mosaicUtils"</span><span class="token punctuation">;</span>
+		<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-vi<span class="token punctuation">.</span><span class="token function">spyOn</span><span class="token punctuation">(</span>mosaicUtils<span class="token punctuation">,</span> <span class="token string">"mosaicFetch"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">mockImplementation</span><span class="token punctuation">(</span>
-  <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token operator">=></span> exampleData<span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Alternatively, spyOn can be used to count how many times the existing function is called during the test.</p>
+    ripgrep
+    fd
+    neovim
 
-<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-07-05-strudel-4th/">5 July 2025: Strudel, New Role, and Mermaid Diagrams in Eleventy</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder-blog/blog/2025-07-20-home-audio-server/">20 July 2025: Home Music Server Setup</a></li>
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>This is imported into the boilerplate flake.nix as a module:</p>
+<pre class="language-nix" tabindex="0"><code class="language-nix">  outputs <span class="token operator">=</span>
+    <span class="token punctuation">{</span> nixpkgs<span class="token punctuation">,</span> home<span class="token operator">-</span>manager<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span><span class="token punctuation">:</span>
+    <span class="token keyword">let</span>
+      system <span class="token operator">=</span> <span class="token string">"x86_64-linux"</span><span class="token punctuation">;</span>
+      pkgs <span class="token operator">=</span> nixpkgs<span class="token punctuation">.</span>legacyPackages<span class="token punctuation">.</span><span class="token antiquotation important">$</span><span class="token punctuation">{</span>system<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">in</span>
+    <span class="token punctuation">{</span>
+      homeConfigurations<span class="token punctuation">.</span><span class="token string">"kaes"</span> <span class="token operator">=</span> home<span class="token operator">-</span>manager<span class="token punctuation">.</span>lib<span class="token punctuation">.</span>homeManagerConfiguration <span class="token punctuation">{</span>
+        <span class="token keyword">inherit</span> pkgs<span class="token punctuation">;</span>
+
+        <span class="token comment"># Specify your home configuration modules here, for example,</span>
+        <span class="token comment"># the path to your home.nix.</span>
+        modules <span class="token operator">=</span> <span class="token punctuation">[</span>
+          <span class="token url">./home.nix</span>
+          <span class="token url">./packages.nix</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token comment"># Optionally use extraSpecialArgs</span>
+        <span class="token comment"># to pass through arguments to home.nix</span>
+      <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Ideally I want to either auto-detect the system and username or modularize that as a minimal local config. But I'm still a beginner at this.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-08-31-nixos-surfshark/">31 August 2025: Surfshark and NixOS</a></li>
 </ul>
 
 			</heading-anchors>
@@ -598,10 +617,7 @@ vi<span class="token punctuation">.</span><span class="token function">spyOn</sp
 			</p>
 		</footer>
 
-		<!-- This page `/blog/2025-07-13-mocking-js/` was built on 2025-09-07T20:41:31.246Z -->
+		<!-- This page `/blog/2025-09-06-nixos-home-manager/` was built on 2025-09-07T20:41:31.247Z -->
 		<script type="module" src="/kaesluder-blog/dist/xbxy_EL6cU.js"></script>
-		<script type="module">
-		  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-		</script>
 	</body>
 </html>
