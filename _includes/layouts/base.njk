@@ -30,6 +30,8 @@
 		{#- Or you can add from node_modules #}
 		{# <style>{% include "node_modules/something.css" %}</style> #}
 
+  	<style>{% include "css/tailwind-output.css" %}</style>
+
 		{#- Render the CSS bundle using inlined CSS (for the fastest site performance in production) #}
 		<style>{% getBundle "css" %}</style>
 
@@ -40,8 +42,9 @@
 		<script type="module">{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}</script>
 		<script src="https://kit.fontawesome.com/400e27f1db.js" crossorigin="anonymous"></script>
 	</head>
-	<body>
+	<body class="bg-slate-900 text-slate-100 flex justify-center prose prose-invert">
 		<a href="#main" id="skip-link" class="visually-hidden">Skip to main content</a>
+		<div class="border border-red-50 min-w-3xl max-w-4xl">
 
 		<header>
 			<a href="https://kaesluder.github.io/" class="home-link">{{ metadata.title }}</a>
@@ -57,7 +60,7 @@
 			</nav>
 		</header>
 
-		<main id="main">
+		<main id="main" class="max-w-4xl">
 			<heading-anchors>
 				{{ content | safe }}
 			</heading-anchors>
@@ -68,7 +71,7 @@
 				<em>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></em>
 			</p>
 		</footer>
-
+	</div>
 		<!-- This page `{{ page.url }}` was built on {% currentBuildDate %} -->
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
 		{%- if mermaid %}

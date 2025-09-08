@@ -1,43 +1,4 @@
 /* Defaults */
-:root {
-	--font-family: -apple-system, system-ui, sans-serif;
-	--font-family-monospace:
-		Courier, Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
-		Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
-		Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
-		Courier, monospace;
-}
-
-/* Theme colors */
-:root {
-	--color-gray-20: #e3e3e3;
-	--color-gray-50: #c0c0c0;
-	--color-gray-90: #333;
-
-	--text-color: var(--color-gray-20);
-
-	--text-color-link: #1493fb;
-	--text-color-link-active: #6969f7;
-	--text-color-link-visited: #a6a6f8;
-
-	--background-color: #15202b;
-	--syntax-tab-size: 2;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-gray-20: #e0e0e0;
-		--color-gray-50: #c0c0c0;
-		--color-gray-90: #dad8d8;
-
-		/* --text-color is assigned to --color-gray-_ above */
-		--text-color-link: #1493fb;
-		--text-color-link-active: #6969f7;
-		--text-color-link-visited: #a6a6f8;
-
-		--background-color: #15202b;
-	}
-}
 
 /* Global stylesheet */
 * {
@@ -52,15 +13,10 @@ html,
 body {
 	padding: 0;
 	margin: 0 auto;
-	font-family: var(--font-family);
-	color: var(--text-color);
-	background-color: var(--background-color);
 }
+
 html {
 	overflow-y: scroll;
-}
-body {
-	max-width: 40em;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -107,14 +63,14 @@ li {
 }
 
 a[href] {
-	color: var(--text-color-link);
+	color: theme('colors.amber.100');
 }
 a[href]:visited {
-	color: var(--text-color-link-visited);
+	color: theme('colors.amber.100');
 }
 a[href]:hover,
 a[href]:active {
-	color: var(--text-color-link-active);
+	color: theme('colors.amber.500');
 }
 
 main,
@@ -126,15 +82,15 @@ main :first-child {
 }
 
 header {
-	border-bottom: 1px dashed var(--color-gray-20);
+	border-bottom: 1px dashed theme('colors.slate.100');
 }
 
 #skip-link {
 	text-decoration: none;
-	background: var(--background-color);
-	color: var(--text-color);
+	background: theme('colors.slate.900');
+	color: theme('colors.slate.100');
 	padding: 0.5rem 1rem;
-	border: 1px solid var(--color-gray-90);
+	border: 1px solid theme('colors.slate.600');
 	border-radius: 2px;
 }
 
@@ -152,7 +108,7 @@ header {
 	justify-content: space-between;
 	gap: 0.5em 1em;
 	list-style: "";
-	border-top: 1px dashed var(--color-gray-20);
+	border-top: 1px dashed theme('colors.slate.100');
 	padding: 1em 0;
 }
 .links-nextprev > * {
@@ -240,7 +196,7 @@ header {
 	align-items: baseline;
 	margin-bottom: 1em;
 	padding-bottom: 0.5em;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid theme('colors.slate.600');
 }
 
 .postlist-iconbox {
@@ -275,7 +231,7 @@ header {
 .postlist-date,
 .postlist-item:before {
 	font-size: 0.8125em; /* 13px /16 */
-	color: var(--color-gray-20);
+	color: theme('colors.slate.300');
 }
 .postlist-date {
 	word-spacing: -0.5px;
@@ -319,7 +275,12 @@ header {
 .post-metadata time {
 	margin-right: 1em;
 }
+/* Heading colors - override prose defaults */
+h1, h2, h3, h4, h5, h6 {
+	color: theme('colors.slate.100') !important;
+}
+
 /* Mermaid diagrams */
 .mermaid {
-	background-color: white !important;
+	background-color: theme('colors.slate.100') !important;
 }

@@ -40,6 +40,7 @@
 		"@11ty/eleventy-navigation": "^1.0.4",
 		"@11ty/eleventy-plugin-rss": "^2.0.4",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+		"@tailwindcss/typography": "^0.5.16",
 		"cross-env": "^7.0.3",
 		"luxon": "^3.6.1",
 		"prismjs": "^1.30.0",
@@ -47,7 +48,9 @@
 		"zod-validation-error": "^3.5.2"
 	},
 	"dependencies": {
+		"@tailwindcss/cli": "^4.1.13",
 		"@zachleat/heading-anchors": "^1.0.3",
-		"markdown-it-mermaid": "^0.2.0"
+		"markdown-it-mermaid": "^0.2.0",
+		"tailwindcss": "^4.1.13"
 	}
 }
