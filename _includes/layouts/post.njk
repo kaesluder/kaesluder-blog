@@ -6,7 +6,9 @@ layout: layouts/base.njk
 <style>{% include "css/prism-diff.css" %}</style>
 {% raw %}
 
-<h1>{{ title }}</h1>
+<div class="prose prose-invert">
+
+<h1 class="mt-4 mb-4">{{ title }}</h1>
 
 <ul class="post-metadata">
 	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
@@ -16,7 +18,12 @@ layout: layouts/base.njk
 	{%- endfor %}
 </ul>
 
+
+<div class="prose prose-invert">
 {{ content | safe }}
+</div>
+
+</div>
 
 {%- if collections.posts %}
 {%- set previousPost = collections.posts | getPreviousCollectionItem %}

@@ -1,24 +1,25 @@
 <ul class="postlist">
 {%- for post in postslist | reverse %}
-<li class="postlist-item">
-<div class="postlist-iconbox">
-	{%- for tag in post.data.tags %}
-		{%- set iconClass = tag | mapTagFontawesome %}
-		{%- if iconClass %}
-		<div>
-			<i class="{{ iconClass }}"></i>
-		</div>
-		{%- endif %}
-	{%- endfor %}
-</div>
-	<div>
-		<div>
-			<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-		</div>
-		<div>
-			<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("dd MMM yyyy") }}</time>
-		</div>
-		</div>
+<li class="postlist-item m-3">
+
+
+<a href="{{ post.url }}" class="grid grid-cols-[auto_1fr] items-center bg-white border border-gray-200 rounded-sm shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+	<div class="postlist-iconbox grid grid-cols-2 gap-1 m-2 size-xl">
+		{%- for tag in post.data.tags %}
+			{%- set iconClass = tag | mapTagFontawesome %}
+			{%- if iconClass %}
+			<div class="size-8">
+				<i class="{{ iconClass }} text-3xl"></i>
+			</div>
+			{%- endif %}
+		{%- endfor %}
+	</div>
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</h5>
+        <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate("dd MMM yyyy") }}</time>
+    </div>
+</a>
+
 </li>
 {%- endfor %}
 </ul>

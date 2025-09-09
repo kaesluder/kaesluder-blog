@@ -7,7 +7,7 @@ const eleventyNavigation = {
 const numberOfLatestPostsToShow = 10;
 ---
 
-<div>
+<div class="format format-invert">
 	<p>
 		This is a space to <cite><a href="https://www.swyx.io/learn-in-public">Learn in Public (PDF)</a></cite> by sharing snippets, resources, reflections and howtos on current projects. Much of this is inspired by how many techniques end up passed through video or confined behind a login wall. Some intrests include:
 	</p>
@@ -20,10 +20,10 @@ const numberOfLatestPostsToShow = 10;
 	</ul>
 
 
-</div>
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
 <h1 clas="size-2xl">Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
+</div>
 
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
 {% set postslistCounter = postsCount %}

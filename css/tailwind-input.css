@@ -4,10 +4,4 @@
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
-
-@layer base {
-  .prose-custom {
-    --tw-prose-invert-body: theme('colors.emerald.300');
-    --tw-prose-invert-headings: theme('colors.emerald.100');
-  }
-}
+@plugin "flowbite-typography";

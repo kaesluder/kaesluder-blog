@@ -1,5 +1,5 @@
 ---js
-const title = '2025-09-06: More Nix with home manager';
+const title = '6 September 2025: More Nix with home manager';
 const date = "2025-09-06";
 const draft = false;
 const tags = ["linux"];
