@@ -5,13 +5,46 @@
   <subtitle>This is a longer description about your blog.</subtitle>
   <link href="https://example.com/kaesluder-blog/feed/feed.xml" rel="self" />
   <link href="https://example.com/kaesluder-blog/" />
-  <updated>2025-09-06T00:00:00Z</updated>
+  <updated>2025-10-03T00:00:00Z</updated>
   <id>https://example.com/kaesluder-blog/</id>
   <author>
     <name>Your Name</name>
   </author>
   <entry>
-    <title>2025-09-06: More Nix with home manager</title>
+    <title>5 October 2025: Thoughts on Documentation vs. Self-Documenting Code</title>
+    <link href="https://example.com/kaesluder-blog/blog/2025-10-05-code-not-documentation/" />
+    <updated>2025-10-03T00:00:00Z</updated>
+    <id>https://example.com/kaesluder-blog/blog/2025-10-05-code-not-documentation/</id>
+    <content type="html">&lt;p&gt;A central problem with the idea of &#39;self-documenting code&#39; is that natural human writing has a rhetorical structure designed to teach the reader basic vocabulary and concepts needed for understanding. Code -- especially DRY (don&#39;t repeat yourself) code -- is non-linear.  As developers maintaining existing code, we&#39;re tasked with jumping into the middle and working backwards to understand what we need before moving on to the next ticket.&lt;/p&gt;
+&lt;p&gt;Let&#39;s say I get asked to rewrite the following bit of poetry to a different style:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Wailing her woe, the widow[1] old,&lt;br&gt;
+her hair upbound, for Beowulf&#39;s death&lt;br&gt;
+sung in her sorrow, and said full oft&lt;br&gt;
+she dreaded the doleful days to come,&lt;br&gt;
+deaths enow, and doom of battle,&lt;br&gt;
+and shame. -- The smoke by the sky was devoured.&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Understanding this requires answering several questions.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Who is the widow? (Unstated in text, usually interpreted as Beowulf&#39;s widow.)&lt;/li&gt;
+&lt;li&gt;How did Beowulf die? (Killed by a dragon earlier in the same act.)&lt;/li&gt;
+&lt;li&gt;Who is he? Why does his death foreshadow doom and battle? (The loss of a community hero leaves it vulnerable to cycles of violence from neighboring groups.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In poetry, these questions are answered organically over the course of three acts. In code, each entity might be separated into separate files or modules. Back-tracing the definition of each can be done through import declarations and LSP features, but this takes critical time. Understanding the lifecycle of each object can be another challenge.&lt;/p&gt;
+&lt;p&gt;In nonfiction there&#39;s a similar structure:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Introduction&lt;/li&gt;
+&lt;li&gt;Development&lt;/li&gt;
+&lt;li&gt;Argument&lt;/li&gt;
+&lt;li&gt;Conclusion&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each step teaches the reader the &lt;em&gt;specific&lt;/em&gt; concepts, definitions, and meanings used within the work. By the time we get to the conclusions, most issues of ambiguity can be resolved.&lt;/p&gt;
+&lt;p&gt;Combining context and intent documentation with clear code can help make code easier to understand.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>6 September 2025: More Nix with home manager</title>
     <link href="https://example.com/kaesluder-blog/blog/2025-09-06-nixos-home-manager/" />
     <updated>2025-09-06T00:00:00Z</updated>
     <id>https://example.com/kaesluder-blog/blog/2025-09-06-nixos-home-manager/</id>
@@ -466,43 +499,6 @@ flowchart TD
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;bell hooks, &amp;quot;All About Love,&amp;quot; Chapter 4&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</title>
-    <link href="https://example.com/kaesluder-blog/blog/2025-06-21-zed-and-other-tricks/" />
-    <updated>2025-06-21T00:00:00Z</updated>
-    <id>https://example.com/kaesluder-blog/blog/2025-06-21-zed-and-other-tricks/</id>
-    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/0FyLcHxbSRk?si=qAEMAohBM02byDmk&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;h2 id=&quot;playing-with-manjaro&quot;&gt;Playing with Manjaro&lt;/h2&gt;
-&lt;p&gt;Working (again) on making an older Thinkpad T420 (2011) useful for home surfing and light development. Trying out &lt;a href=&quot;https://manjaro.org/&quot;&gt; Manjaro &lt;/a&gt; for now because with hardware this old I&#39;ve run into issue with immutable systems like &lt;a href=&quot;https://fedoraproject.org/atomic-desktops/&quot;&gt;Fedora Atomic&lt;/a&gt;.&lt;/p&gt;
-&lt;h3 id=&quot;tweaking-full-disk-encryption&quot;&gt;Tweaking full-disk encryption&lt;/h3&gt;
-&lt;p&gt;Full-disk encryption defaults can be unbearably slow for unlocking (over 1 minute) on this machine. Unlocking happens early during the boot process before the system has access to crypto hardware. I tweaked this using the following to set the number of iterations to a lower value. Dropping from 1,500,000 to 10,000 combined with a high-entropy passphrase is hopefully good enough for the need:&lt;/p&gt;
-&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksChangeKey --pbkdf-force-iterations &lt;span class=&quot;token number&quot;&gt;10000&lt;/span&gt; --key-slot &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; /dev/sda1
-
-&lt;span class=&quot;token comment&quot;&gt;# check key creation&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksDump /dev/sda1
-
-&lt;span class=&quot;token comment&quot;&gt;# remove old key&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; cryptsetup luksKillKey /dev/sda1 &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;As always, double-check device ids and RTFM before making changes.&lt;/p&gt;
-&lt;h2 id=&quot;tools-show-and-share&quot;&gt;Tools Show and Share&lt;/h2&gt;
-&lt;p&gt;Working on a show-and-share featuring the following:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://zed.dev/&quot;&gt;Zed Editor&lt;/a&gt;: Fast editor written in rust.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/sigoden/aichat&quot;&gt;aichat&lt;/a&gt;: Command line LLM client. Good for working through tricky bash and git options.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;challenges-of-the-week&quot;&gt;Challenges of the Week&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Adapting a legacy web component to read a new data spec as part of our plaid integration. So far it&#39;s mostly understanding the old data structure and renaming fields so that everything (hopefully) works.&lt;/li&gt;
-&lt;li&gt;Translation tags for a feature I&#39;ve been working on.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;games&quot;&gt;Games&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Started a playthrough of &lt;a href=&quot;https://altersthegame.com/&quot;&gt;The Alters&lt;/a&gt;. This is similar to the 1996 movie &lt;a href=&quot;https://www.imdb.com/title/tt0117108/&quot;&gt;Multiplicity&lt;/a&gt; where a stressed-out husband clones himself multiple times. &lt;em&gt;The Alters&lt;/em&gt; is a base-building survival game centered around Jan, a construction expert. Fortunately, he has weird science to clone himself multiple times, giving each clone fake memories of the training and skills he lacks. Unfortunately, each clone has survived a different set of challenges and traumas. As is frequently the case in survival scifi, your biggest challenge is yourself.&lt;/li&gt;
-&lt;li&gt;Backed &lt;a href=&quot;https://www.kickstarter.com/projects/hecticelectron/defy-the-gods-rpg&quot;&gt;Defy the Gods&lt;/a&gt;, a mesopotamian-themed TTRPG.&lt;/li&gt;
-&lt;li&gt;Picked up &lt;a href=&quot;https://modiphius.net/en-us/pages/homeworld&quot;&gt;Homeworld: Revelations&lt;/a&gt;, because I&#39;ve never been quite able to get the CRPG to run.&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

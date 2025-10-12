@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</title>
+		<title>5 October 2025: Thoughts on Documentation vs. Self-Documenting Code</title>
 		<meta name="description" content="A personal learn-in-public blog, mostly about programming.">
 		<link rel="alternate" href="/kaesluder-blog/feed/feed.xml" type="application/atom+xml" title="Kae Job Sluder">
 		
@@ -528,46 +528,41 @@ pre[class*="language-diff-"] {
 
 
 
-<h1 id="21-june-2025-roundup-speeding-up-linux-disk-decryption-share-topics-reflections-games">21 June 2025: Roundup: Speeding up linux disk decryption, share topics, reflections, games</h1>
+<h1 id="5-october-2025-thoughts-on-documentation-vs-self-documenting-code">5 October 2025: Thoughts on Documentation vs. Self-Documenting Code</h1>
 
 <ul class="post-metadata">
-	<li><time datetime="2025-06-21">21 June 2025</time></li>
-	<li><a href="/kaesluder-blog/tags/linux/" class="post-tag">linux</a>, </li>
+	<li><time datetime="2025-10-03">03 October 2025</time></li>
 	<li><a href="/kaesluder-blog/tags/javascript/" class="post-tag">javascript</a></li>
 </ul>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0FyLcHxbSRk?si=qAEMAohBM02byDmk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
-<h2 id="playing-with-manjaro">Playing with Manjaro</h2>
-<p>Working (again) on making an older Thinkpad T420 (2011) useful for home surfing and light development. Trying out <a href="https://manjaro.org/"> Manjaro </a> for now because with hardware this old I've run into issue with immutable systems like <a href="https://fedoraproject.org/atomic-desktops/">Fedora Atomic</a>.</p>
-<h3 id="tweaking-full-disk-encryption">Tweaking full-disk encryption</h3>
-<p>Full-disk encryption defaults can be unbearably slow for unlocking (over 1 minute) on this machine. Unlocking happens early during the boot process before the system has access to crypto hardware. I tweaked this using the following to set the number of iterations to a lower value. Dropping from 1,500,000 to 10,000 combined with a high-entropy passphrase is hopefully good enough for the need:</p>
-<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token function">sudo</span> cryptsetup luksChangeKey --pbkdf-force-iterations <span class="token number">10000</span> --key-slot <span class="token number">0</span> /dev/sda1
-
-<span class="token comment"># check key creation</span>
-<span class="token function">sudo</span> cryptsetup luksDump /dev/sda1
-
-<span class="token comment"># remove old key</span>
-<span class="token function">sudo</span> cryptsetup luksKillKey /dev/sda1 <span class="token number">0</span></code></pre>
-<p>As always, double-check device ids and RTFM before making changes.</p>
-<h2 id="tools-show-and-share">Tools Show and Share</h2>
-<p>Working on a show-and-share featuring the following:</p>
+<p>A central problem with the idea of 'self-documenting code' is that natural human writing has a rhetorical structure designed to teach the reader basic vocabulary and concepts needed for understanding. Code -- especially DRY (don't repeat yourself) code -- is non-linear.  As developers maintaining existing code, we're tasked with jumping into the middle and working backwards to understand what we need before moving on to the next ticket.</p>
+<p>Let's say I get asked to rewrite the following bit of poetry to a different style:</p>
+<blockquote>
+<p>Wailing her woe, the widow[1] old,<br>
+her hair upbound, for Beowulf's death<br>
+sung in her sorrow, and said full oft<br>
+she dreaded the doleful days to come,<br>
+deaths enow, and doom of battle,<br>
+and shame. -- The smoke by the sky was devoured.<br></p>
+</blockquote>
+<p>Understanding this requires answering several questions.</p>
 <ul>
-<li><a href="https://zed.dev/">Zed Editor</a>: Fast editor written in rust.</li>
-<li><a href="https://github.com/sigoden/aichat">aichat</a>: Command line LLM client. Good for working through tricky bash and git options.</li>
+<li>Who is the widow? (Unstated in text, usually interpreted as Beowulf's widow.)</li>
+<li>How did Beowulf die? (Killed by a dragon earlier in the same act.)</li>
+<li>Who is he? Why does his death foreshadow doom and battle? (The loss of a community hero leaves it vulnerable to cycles of violence from neighboring groups.)</li>
 </ul>
-<h2 id="challenges-of-the-week">Challenges of the Week</h2>
-<ul>
-<li>Adapting a legacy web component to read a new data spec as part of our plaid integration. So far it's mostly understanding the old data structure and renaming fields so that everything (hopefully) works.</li>
-<li>Translation tags for a feature I've been working on.</li>
-</ul>
-<h2 id="games">Games</h2>
-<ul>
-<li>Started a playthrough of <a href="https://altersthegame.com/">The Alters</a>. This is similar to the 1996 movie <a href="https://www.imdb.com/title/tt0117108/">Multiplicity</a> where a stressed-out husband clones himself multiple times. <em>The Alters</em> is a base-building survival game centered around Jan, a construction expert. Fortunately, he has weird science to clone himself multiple times, giving each clone fake memories of the training and skills he lacks. Unfortunately, each clone has survived a different set of challenges and traumas. As is frequently the case in survival scifi, your biggest challenge is yourself.</li>
-<li>Backed <a href="https://www.kickstarter.com/projects/hecticelectron/defy-the-gods-rpg">Defy the Gods</a>, a mesopotamian-themed TTRPG.</li>
-<li>Picked up <a href="https://modiphius.net/en-us/pages/homeworld">Homeworld: Revelations</a>, because I've never been quite able to get the CRPG to run.</li>
-</ul>
+<p>In poetry, these questions are answered organically over the course of three acts. In code, each entity might be separated into separate files or modules. Back-tracing the definition of each can be done through import declarations and LSP features, but this takes critical time. Understanding the lifecycle of each object can be another challenge.</p>
+<p>In nonfiction there's a similar structure:</p>
+<ol>
+<li>Introduction</li>
+<li>Development</li>
+<li>Argument</li>
+<li>Conclusion</li>
+</ol>
+<p>Each step teaches the reader the <em>specific</em> concepts, definitions, and meanings used within the work. By the time we get to the conclusions, most issues of ambiguity can be resolved.</p>
+<p>Combining context and intent documentation with clear code can help make code easier to understand.</p>
 
-<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-06-14-cut-ups-krell/">14 June 2025: Cut-Ups, Simplified Krell Patch</a></li><li class="links-nextprev-next">Next →<br><a href="/kaesluder-blog/blog/2025-06-28-shuffle-and-backup/">28 June 2025: Shuffle and Backup</a></li>
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/kaesluder-blog/blog/2025-09-06-nixos-home-manager/">6 September 2025: More Nix with home manager</a></li>
 </ul>
 
 			</heading-anchors>
@@ -579,7 +574,7 @@ pre[class*="language-diff-"] {
 			</p>
 		</footer>
 
-		<!-- This page `/blog/2025-06-21-zed-and-other-tricks/` was built on 2025-10-12T13:08:54.757Z -->
+		<!-- This page `/blog/2025-10-05-code-not-documentation/` was built on 2025-10-12T13:08:54.757Z -->
 		<script type="module" src="/kaesluder-blog/dist/xbxy_EL6cU.js"></script>
 	</body>
 </html>
